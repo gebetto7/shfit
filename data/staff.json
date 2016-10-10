@@ -1,0 +1,37 @@
+{"staff":
+[
+  {
+    "name":"阿部",
+    "age":21,
+    "number":1,
+    "password":"100",
+    "mastery":"3",
+    "tell":"080-5466-0188",
+    "mail":"s1321056@cce.kanagawa-it.ac.jp",
+    "instructor":true,
+    "regular":true
+  },
+  {
+    "name":"覇上院",
+    "age":21,
+    "number":2,
+    "password":"200",
+    "mastery":"1",
+    "tell":"080-5466-0188",
+    "mail":"s1321011@cce.kanagawa-it.ac.jp",
+    "instructor":false,
+    "regular":false
+  },
+  {
+    "name":"吉田",
+    "age":21,
+    "number":3,
+    "password":"300",
+    "mastery":"1",
+    "tell":"080-5466-0188",
+    "mail":"s1321011@cce.kanagawa-it.ac.jp",
+    "instructor":false,
+    "regular":false
+  }
+]
+}

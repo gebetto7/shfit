@@ -1,0 +1,7 @@
+td{
+    width: 25px;
+    text-align: center;
+}
+div > td{
+    width: 50px
+}
