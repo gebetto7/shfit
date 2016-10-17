@@ -6,12 +6,12 @@
     "max":10
   },
   {
-    "number":1,
+    "number":2,
     "min":9,
     "max":17
   },
   {
-    "number":2,
+    "number":1,
     "min":17,
     "max":24
   }

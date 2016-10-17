@@ -1,6 +1,17 @@
 {"staff":
 [
   {
+    "name":"管理者",
+    "age":43,
+    "number":0,
+    "password":"000",
+    "mastery":"3",
+    "tell":"046-999-8888",
+    "mail":"s1321056@cce.kanagawa-it.ac.jp",
+    "instructor":true,
+    "regular":true
+  },
+  {
     "name":"阿部",
     "age":21,
     "number":1,
