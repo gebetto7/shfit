@@ -17,7 +17,7 @@
         $shift_array = json_decode($json,true);
 
         /*JSONデータ(スタッフ情報)の読み込み*/
-        $staff_url = "../data/staff.json";
+        $staff_url = "../data/management/staff.json";
         $json = file_get_contents($staff_url);
         $staff_array = json_decode($json,true);
 
@@ -51,4 +51,3 @@
         }
 
     }
-?>

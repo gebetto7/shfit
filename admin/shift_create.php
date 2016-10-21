@@ -10,7 +10,7 @@
     <?php
 
     /*JSONデータ(スタッフ情報)の読み込み*/
-    $staff_url = "../data/staff.json";
+    $staff_url = "../data/management/staff.json";
     $json = file_get_contents($staff_url);
     $staff_array = json_decode($json,true);
     
@@ -20,9 +20,9 @@
     $shift_array = json_decode($json,true);
 
     /*JSONデータ(勤務時間情報)の読み込み*/
-    $working_url = "../data/working.json";
-    $json = file_get_contents($working_url);
-    $working_array = json_decode($json,true);
+    //$working_url = "../data/working.json";
+    //$json = file_get_contents($working_url);
+    //$working_array = json_decode($json,true);
 
     /*時間の表示(表)*/
     echo '<tr><td></td>';
@@ -36,20 +36,24 @@
     $month = date('n');
 
     /*シフト表の表示*/
-    for($staff_count = 0; $staff_count < sizeof($staff_array['staff']); $staff_count++) {
+    for($shift_count = 0; $shift_count < sizeof($staff_array['staff']); $shift_count++) {
+
+        //シフト表1列表示部分
+        //ここから
         echo '<tr>';
         /*従業員名の表示*/
-        echo '<div><td>' . $staff_array['staff'][$staff_count]['name'] . '</td></div>';
+        echo '<div><td>' . $staff_array['staff'][$shift_count]['name'] . '</td></div>';
 
         /*時間表表示*/
         for ($time_count = 0; $time_count <= 23; $time_count++) {
-            if ($shift_array['shift'][$staff_count]['min'] <= $time_count && $shift_array['shift'][$staff_count]['max'] > $time_count) {
+            if ($shift_array['shift'][$shift_count]['min'] <= $time_count && $shift_array['shift'][$shift_count]['max'] > $time_count) {
                 echo "<td>●</td>";
             } else {
                 echo "<td>　</td>";
             }
         }
         echo '</tr>';
+        //ここまで
     }
     ?>
 </table>
