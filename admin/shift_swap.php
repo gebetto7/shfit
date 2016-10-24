@@ -9,15 +9,22 @@
     $json = file_get_contents($shift_url);
     $shift_array = json_decode($json,true);
 
-    var_dump($shift_array["shift"][0]); echo "<br>";
-    var_dump($shift_array["shift"][1]); echo "<br>";
-
-    $swap = $shift_array["shift"][0];
-    $shift_array["shift"][0] = $shift_array["shift"][1];
-    $shift_array["shift"][1] = $swap;
-
-    var_dump($shift_array["shift"][0]); echo "<br>";
-    var_dump($shift_array["shift"][1]); echo "<br>";
+    for ($i = 0; $i < sizeof($shift_array["shift"]) - 1; $i++){
+        for ($j = $i + 1; $j < sizeof($shift_array["shift"]) - 1; $j++){
+            if ($shift_array["shift"][$i]["min"] > $shift_array["shift"][$j]["min"]){
+                $swap = $shift_array["shift"][$i];
+                $shift_array["shift"][$i] = $shift_array["shift"][$j];
+                $shift_array["shift"][$j] = $swap;
+            }
+            else if($shift_array["shift"][$i]["min"] == $shift_array["shift"][$j]["min"]){
+                if ($shift_array["shift"][$i]["max"] > $shift_array["shift"][$j]["max"]){
+                    $swap = $shift_array["shift"][$i];
+                    $shift_array["shift"][$i] = $shift_array["shift"][$j];
+                    $shift_array["shift"][$j] = $swap;
+                }
+            }
+        }
+    }
 
     $fjson = fopen($shift_url, "w+b");
     fwrite($fjson, json_encode($shift_array, JSON_UNESCAPED_UNICODE));

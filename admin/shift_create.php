@@ -31,18 +31,19 @@
     }
     echo '</tr>';
 
-    
+
     $year = date('Y');
     $month = date('n');
 
     /*シフト表の表示*/
-    for($shift_count = 0; $shift_count < sizeof($staff_array['staff']); $shift_count++) {
-
+    for($shift_count = 0; $shift_count < sizeof($shift_array['shift']); $shift_count++) {
         //シフト表1列表示部分
         //ここから
         echo '<tr>';
+        /*従業員名の格納*/
+        $number = $shift_array["shift"][$shift_count]["number"];
         /*従業員名の表示*/
-        echo '<div><td>' . $staff_array['staff'][$shift_count]['name'] . '</td></div>';
+        echo '<div><td>' . $staff_array['staff'][$number]['name'] . '</td></div>';
 
         /*時間表表示*/
         for ($time_count = 0; $time_count <= 23; $time_count++) {
