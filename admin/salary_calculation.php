@@ -38,8 +38,7 @@
             $salary_sum = 0;
             $salary_sum = $salary_sum + ($shift_array['shift'][$shift_count]['max'] - $shift_array['shift'][$shift_count]['min']);
             $sum['salary'][0]['weekly_hours'] = $sum['salary'][0]['weekly_hours'] + $salary_sum;
-
-            echo $name . "さんは" . $salary_sum . "時間働いたので合計時間は" . $sum['salary'][0]['weekly_hours'] . "時間です。<br>";
+            echo $name . ":  勤務時間: " . $salary_sum . "時間  合計時間: " . $sum['salary'][0]['weekly_hours'] . "時間<br>";
             /*合計時間のjsonファイルへの書き出し*/
             $fjson = fopen($sum_url, "w+b");
             fwrite($fjson, json_encode($sum, JSON_UNESCAPED_UNICODE));
