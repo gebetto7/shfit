@@ -8,6 +8,8 @@
 <body>
 <table border="1">
     <?php
+    include 'shift_swap.php';   //シフト表整形
+    include 'salary_calculation.php';   //勤務合計時間算出
 
     /*JSONデータ(スタッフ情報)の読み込み*/
     $staff_url = "../data/management/staff.json";
@@ -16,8 +18,11 @@
     
     /*JSONデータ(シフト情報)の読み込み*/
     $shift_url = "../data/shift/2016102shift.json";
+    swap($shift_url);   //
     $json = file_get_contents($shift_url);
     $shift_array = json_decode($json,true);
+
+    swap($shift_url);
 
     /*JSONデータ(勤務時間情報)の読み込み*/
     //$working_url = "../data/working.json";

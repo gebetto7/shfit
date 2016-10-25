@@ -4,10 +4,10 @@
     $json = file_get_contents($last_url);
     $last = json_decode($json, true);
 
-    /*合計時間計算のためのオブジェクト*/
-    //$sum_url = "../data/salary/salary1.json";
-    //$json = file_get_contents($sum_url);
-    //$sum = json_decode($json, true);
+    //時給データの取得
+    $wage_url = "../data/management/time_zone.json";
+    $json = file_get_contents($wage_url);
+    $wage = json_decode($json, true);
 
     for ($count = $last['day'] + 1; $count <= $last['day'] + 7; $count++){
 
@@ -20,10 +20,6 @@
         $staff_url = "../data/management/staff.json";
         $json = file_get_contents($staff_url);
         $staff_array = json_decode($json,true);
-
-        /**/
-        $salary_url = "";
-        echo $count . "------------------------------<br><br>"; //日にちの表示
 
         for ($shift_count = 0; $shift_count < sizeof($shift_array['shift']); $shift_count++){   //シフト表に入ってる人の数だけループ
             for ($staff_count = 0; $staff_count < sizeof($staff_array['staff']); $staff_count++){
