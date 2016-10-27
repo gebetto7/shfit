@@ -22,12 +22,12 @@
     $json = file_get_contents($shift_url);
     $shift_array = json_decode($json,true);
 
-    swap($shift_url);
+    //シフト表を最終作成日の取得
+    $last_url = "../data/shift/last.json";
+    $json = file_get_contents($last_url);
+    $last = json_decode($json, true);
 
-    /*JSONデータ(勤務時間情報)の読み込み*/
-    //$working_url = "../data/working.json";
-    //$json = file_get_contents($working_url);
-    //$working_array = json_decode($json,true);
+    /*日付の表示*/
 
     /*時間の表示(表)*/
     echo '<tr><td></td>';
@@ -58,9 +58,10 @@
                 echo "<td>　</td>";
             }
         }
-        echo '</tr>';
+        echo "</tr>";
         //ここまで
     }
+    calculation($last['day'] + 1);
     ?>
 </table>
 </body>
