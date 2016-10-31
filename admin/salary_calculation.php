@@ -30,17 +30,17 @@
                     /*一致した場合*/
                     $name = $staff_array['staff'][$staff_count]['name'];    //名前の格納
                     /*一致した従業員の番号に応じた勤務合計時間の取得*/
-                    $sum_url = "../data/salary/salary" . $staff_count . ".json";
+                    $sum_url = "../data/time/time" . $staff_count . ".json";
                     $json = file_get_contents($sum_url);
                     $sum = json_decode($json, true);
                     break;
                 }
             }
 
-            $salary_sum = 0;
-            $salary_sum = $salary_sum + ($shift_array['shift'][$shift_count]['max'] - $shift_array['shift'][$shift_count]['min']);
-            $sum['salary'][0]['weekly_hours'] = $sum['salary'][0]['weekly_hours'] + $salary_sum;
-            echo $name . ":  勤務時間: " . $salary_sum . "時間  合計時間: " . $sum['salary'][0]['weekly_hours'] . "時間<br>";
+            $time_sum = 0;
+            $time_sum = $time_sum + ($shift_array['shift'][$shift_count]['max'] - $shift_array['shift'][$shift_count]['min']);
+            $sum['time'][0]['weekly_hours'] = $sum['time'][0]['weekly_hours'] + $time_sum;
+            echo $name . ":  勤務時間: " . $time_sum . "時間  合計時間: " . $sum['time'][0]['weekly_hours'] . "時間<br>";
             /*合計時間のjsonファイルへの書き出し*/
             $fjson = fopen($sum_url, "w+b");
             fwrite($fjson, json_encode($sum, JSON_UNESCAPED_UNICODE));

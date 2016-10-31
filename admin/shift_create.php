@@ -2,7 +2,6 @@
 <html>
 <head>
     <meta charset='utf-8'>
-    <link rel="stylesheet" type="text/css" href="../css/shift.css">
     <title>シフト表作成</title>
 </head>
 <body>
@@ -17,7 +16,7 @@
     $staff_array = json_decode($json,true);
     
     /*JSONデータ(シフト情報)の読み込み*/
-    $shift_url = "../data/shift/2016102shift.json";
+    $shift_url = "../data/shift/2016103shift.json";
     swap($shift_url);   //
     $json = file_get_contents($shift_url);
     $shift_array = json_decode($json,true);
@@ -30,15 +29,11 @@
     /*日付の表示*/
 
     /*時間の表示(表)*/
-    echo '<tr><td></td>';
+    echo '<table border="1" cellpadding="2"><tr><td></td>';
     for ($a = 0; $a <= 23; $a++){
         echo '<td>'. $a .'</td>';
     }
     echo '</tr>';
-
-
-    $year = date('Y');
-    $month = date('n');
 
     /*シフト表の表示*/
     for($shift_count = 0; $shift_count < sizeof($shift_array['shift']); $shift_count++) {
@@ -61,7 +56,9 @@
         echo "</tr>";
         //ここまで
     }
+    echo "</table><br>";
     calculation($last['day'] + 1);
+    
     ?>
 </table>
 </body>

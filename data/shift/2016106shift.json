@@ -1,44 +1,9 @@
-{
-  "shift": [
-    {
-      "number":3,
-      "min":0,
-      "max":2
-    },
-    {
-      "number":1,
-      "min":6,
-      "max":9
-    },
-    {
-      "number":2,
-      "min":0,
-      "max":6
-    },
-    {
-      "number":6,
-      "min":6,
-      "max":14
-    },
-    {
-      "number":8,
-      "min":9,
-      "max":17
-    },
-    {
-      "number":0,
-      "min":14,
-      "max":22
-    },
-    {
-      "number": 7,
-      "min": 17,
-      "max": 24
-    },
-    {
-      "number": 2,
-      "min": 22,
-      "max": 24
-    }
-  ]
-}
+{"shift":[
+  {"number":8,"min":9,"max":17},
+  {"number":3,"min":0,"max":2},
+  {"number":1,"min":6,"max":9},
+  {"number":6,"min":6,"max":14},
+  {"number":7,"min":17,"max":24},
+  {"number":2,"min":0,"max":6},
+  {"number":0,"min":14,"max":22},
+  {"number":4,"min":22,"max":24}]}
