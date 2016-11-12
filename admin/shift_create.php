@@ -7,58 +7,32 @@
 <body>
 <table border="1">
     <?php
-    include 'shift_swap.php';   //シフト表整形
-    include 'salary_calculation.php';   //勤務合計時間算出
+        include 'shift_swap.php';   //シフト表整形
+        include 'time_calculation.php';   //勤務合計時間算出
+        include 'shift_view_func.php';      //シフト閲覧
 
-    /*JSONデータ(スタッフ情報)の読み込み*/
-    $staff_url = "../data/management/staff.json";
-    $json = file_get_contents($staff_url);
-    $staff_array = json_decode($json,true);
-    
-    /*JSONデータ(シフト情報)の読み込み*/
-    $shift_url = "../data/shift/2016103shift.json";
-    swap($shift_url);   //
-    $json = file_get_contents($shift_url);
-    $shift_array = json_decode($json,true);
+        /*JSONデータ(スタッフ情報)の読み込み*/
+        $staff_url = "../data/management/staff.json";
 
-    //シフト表を最終作成日の取得
-    $last_url = "../data/shift/last.json";
-    $json = file_get_contents($last_url);
-    $last = json_decode($json, true);
+        $json = file_get_contents($staff_url);
+        $staff_array = json_decode($json,true);
 
-    /*日付の表示*/
+        /*JSONデータ(シフト情報)の読み込み*/
+        $shift_url = "../data/shift/2016102shift.json";
+        swap($shift_url);
+        $json = file_get_contents($shift_url);
+        $shift_array = json_decode($json,true);
 
-    /*時間の表示(表)*/
-    echo '<table border="1" cellpadding="2"><tr><td></td>';
-    for ($a = 0; $a <= 23; $a++){
-        echo '<td>'. $a .'</td>';
-    }
-    echo '</tr>';
+        //シフト表を最終作成日の取得
+        $last_url = "../data/shift/last.json";
+        $json = file_get_contents($last_url);
+        $last = json_decode($json, true);
 
-    /*シフト表の表示*/
-    for($shift_count = 0; $shift_count < sizeof($shift_array['shift']); $shift_count++) {
-        //シフト表1列表示部分
-        //ここから
-        echo '<tr>';
-        /*従業員名の格納*/
-        $number = $shift_array["shift"][$shift_count]["number"];
-        /*従業員名の表示*/
-        echo '<div><td>' . $staff_array['staff'][$number]['name'] . '</td></div>';
-
-        /*時間表表示*/
-        for ($time_count = 0; $time_count <= 23; $time_count++) {
-            if ($shift_array['shift'][$shift_count]['min'] <= $time_count && $shift_array['shift'][$shift_count]['max'] > $time_count) {
-                echo "<td>●</td>";
-            } else {
-                echo "<td>　</td>";
-            }
+        /*日付の表示*/
+        for ($count = $last['day'] + 1; $count <= $last['day'] + 7; $count++){
+            shift_view($last['year'], $last['month'], $count);
+            time_calculation($last['day'] + 1);
         }
-        echo "</tr>";
-        //ここまで
-    }
-    echo "</table><br>";
-    calculation($last['day'] + 1);
-    
     ?>
 </table>
 </body>

@@ -1,5 +1,5 @@
 <?php
-    function calculation($day)
+    function time_calculation($day)
     {
         //シフト表を最終作成日の取得
         $last_url = "../data/shift/last.json";
@@ -10,8 +10,6 @@
         $wage_url = "../data/management/time_zone.json";
         $json = file_get_contents($wage_url);
         $wage = json_decode($json, true);
-
-        //for ($count = $last['day'] + 1; $count <= $last['day'] + 7; $count++){
 
         /*JSONデータ(シフト情報)の読み込み*/
         $shift_url = "../data/shift/" . $last['year'] . $last['month'] . $day . "shift.json";
@@ -41,10 +39,10 @@
             $time_sum = $time_sum + ($shift_array['shift'][$shift_count]['max'] - $shift_array['shift'][$shift_count]['min']);
             $sum['time'][0]['weekly_hours'] = $sum['time'][0]['weekly_hours'] + $time_sum;
             echo $name . ":  勤務時間: " . $time_sum . "時間  合計時間: " . $sum['time'][0]['weekly_hours'] . "時間<br>";
+
             /*合計時間のjsonファイルへの書き出し*/
             $fjson = fopen($sum_url, "w+b");
             fwrite($fjson, json_encode($sum, JSON_UNESCAPED_UNICODE));
             fclose($fjson);
         }
     }
-    //}
