@@ -1,18 +1,13 @@
 <?php
-    function time_calculation($day)
+    function time_calculation($year, $month, $day)
     {
-        //シフト表を最終作成日の取得
-        $last_url = "../data/shift/last.json";
-        $json = file_get_contents($last_url);
-        $last = json_decode($json, true);
-
         //時給データの取得
         $wage_url = "../data/management/time_zone.json";
         $json = file_get_contents($wage_url);
         $wage = json_decode($json, true);
 
         /*JSONデータ(シフト情報)の読み込み*/
-        $shift_url = "../data/shift/" . $last['year'] . $last['month'] . $day . "shift.json";
+        $shift_url = "../data/shift/" . $year . $month . $day . "shift.json";
         $json = file_get_contents($shift_url);
         $shift_array = json_decode($json, true);
 

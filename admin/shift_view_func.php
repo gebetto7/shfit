@@ -11,6 +11,7 @@ function shift_view($year, $month, $day)
     echo $year . "年" . $month . "月" . $day . "日<br>";
     /*JSONデータ(シフト情報)の読み込み*/
     $shift_url = "../data/shift/" . $year . $month . $day . "shift.json";
+    swap($shift_url);
     $json = file_get_contents($shift_url);
     $shift_array = json_decode($json, true);
 

@@ -13,6 +13,6 @@
 <?php
     echo "作業用";
 ?>
-<button type="button" onclick="location.href='salary_reset.php'">勤務時間リセット</button></br></br>
+<button type="button" onclick="location.href='time_reset.php'">勤務時間リセット</button></br></br>
 </body>
 </html>
