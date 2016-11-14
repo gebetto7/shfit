@@ -9,7 +9,10 @@
     <?php
         include 'shift_swap.php';
         include 'time_calculation.php';   //勤務合計時間算出
-        include 'shift_view_func.php';      //シフト閲覧
+        include 'shift_view_func.php';//シフト閲覧
+        include 'mastery_check.php';
+        include 'time_check.php';
+        include 'check.php';
 
         //シフト表を最終作成日の取得
         $last_url = "../data/shift/last.json";
@@ -22,6 +25,7 @@
             //そのための関数を用意する
             shift_view($last['year'], $last['month'], $last['day']);
             time_calculation($last['year'], $last['month'], $last['day']);
+            check($last['year'], $last['month'], $last['day']);
             $last['day']++;
         }
     ?>
