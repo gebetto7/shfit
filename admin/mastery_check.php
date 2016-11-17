@@ -1,6 +1,7 @@
 <?php
     function mastery_check($year, $month, $day){
-
+        
+        //シフト情報の取得
         $shift_url = "../data/shift/" . $year . $month . $day . "shift.json";
         $json = file_get_contents($shift_url);
         $shift_array = json_decode($json, true);
@@ -9,7 +10,8 @@
         $staff_url = "../data/management/staff.json";
         $json = file_get_contents($staff_url);
         $staff_array = json_decode($json,true);
-
+        
+        
         $count = 0;
         $mastery_sum = 0;
         while (($shift_array['shift'][$count]['min'] == 0) &&

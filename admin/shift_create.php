@@ -5,7 +5,6 @@
     <title>シフト表作成</title>
 </head>
 <body>
-<table border="1">
     <?php
         include 'shift_swap.php';
         include 'time_calculation.php';   //勤務合計時間算出
@@ -33,7 +32,6 @@
             matching($last['year'], $last['month'], $last['day']);    //希望表からシフト表を作成
             shift_view($last['year'], $last['month'], $last['day']);
             time_calculation($last['year'], $last['month'], $last['day']);
-            check($last['year'], $last['month'], $last['day']);
             $last['day']++;
         }
     
@@ -52,6 +50,5 @@
             fclose($fjson);
         }
     ?>
-</table>
 </body>
 </html>

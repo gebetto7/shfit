@@ -29,7 +29,7 @@ function shift_view($year, $month, $day)
         /*従業員名の格納*/
         $number = $shift_array["shift"][$shift_count]["number"];
         /*従業員名の表示*/
-        echo '<div><td>' . $staff_array['staff'][$number]['name'] . '</td></div>';
+        echo '<td>' . $staff_array['staff'][$number]['name'] . '</td>';
 
         /*時間表表示*/
         for ($time_count = 0; $time_count <= 23; $time_count++) {
