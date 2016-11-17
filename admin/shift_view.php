@@ -7,7 +7,17 @@
 <body>
 <?php
     include 'shift_view_func.php';   //
-    shift_view(7);
+    include 'shift_swap.php';
+
+    $last_url = "../data/shift/last.json";
+    $json = file_get_contents($last_url);
+    $last = json_decode($json, true);
+    $last['day']++;
+
+    for ($count = 0; $count <= 6; $count++){
+        shift_view($last['year'], $last['month'], $last['day']);
+        $last['day']++;
+    }
 ?>
 </table>
 </body>

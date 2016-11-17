@@ -4,7 +4,7 @@
     $json = file_get_contents($staff_url);
     $staff_array = json_decode($json,true);
 
-    for ($count = 0; $count <= sizeof($staff_array["staff"]); $count++){
+    for ($count = 0; $count < sizeof($staff_array["staff"]); $count++){
         $url = "../data/time/time" . $count . ".json";
         $json = file_get_contents($url);
         $sum = json_decode($json, true);
