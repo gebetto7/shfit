@@ -33,6 +33,7 @@
             shift_view($last['year'], $last['month'], $last['day']);
             time_calculation($last['year'], $last['month'], $last['day']);
             $last['day']++;
+            echo "<br><br>";
         }
     
         for ($count = 0; $count < sizeof($staff_array['staff']); $count++){

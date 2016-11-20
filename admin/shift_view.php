@@ -6,6 +6,7 @@
 </head>
 <body>
 <?php
+header("Content-Type: application/json; charset=utf-8");
     include 'shift_view_func.php';   //
     include 'shift_swap.php';
 
