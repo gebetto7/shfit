@@ -11,7 +11,6 @@
         include 'shift_view_func.php';  //シフト閲覧
         include 'mastery_check.php';
         include 'time_check.php';
-        include 'check.php';
         include 'matching.php';
 
         //シフト表を最終作成日の取得
@@ -30,6 +29,7 @@
             //そのための関数を用意する
             
             matching($last['year'], $last['month'], $last['day']);    //希望表からシフト表を作成
+            mastery_check($last['year'], $last['month'], $last['day']);
             shift_view($last['year'], $last['month'], $last['day']);
             time_calculation($last['year'], $last['month'], $last['day']);
             $last['day']++;

@@ -1,6 +1,5 @@
 <?php
 function time_check($year, $month, $day){
-    header("Content-Type: application/json; charset=utf-8");
     $shift_url = "../data/shift/" . $year . $month . $day . "shift.json";
     $json = file_get_contents($shift_url);
     $shift_array = json_decode($json, true);

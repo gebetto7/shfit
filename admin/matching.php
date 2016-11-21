@@ -45,7 +45,8 @@ function matching($year, $month, $day){
                 $count++;
             }
             else if (($time_array['time'][0]['weekly_hours'] + $this_week_array[$staff_key]['weekly_hours']) > 40){
-                echo $time_zone_array['time_zone'][$time_zone_count]['name'] . "：" . $staff_array['staff'][$staff_key]['name'] . "さんは" . $this_time . "時間働くと今週" . ($time_array['time'][0]['weekly_hours'] + $this_week_array[$staff_key]['weekly_hours']) . "時間働くことになるため除外されました。<br>";
+                echo $time_zone_array['time_zone'][$time_zone_count]['name'] . "：" . $staff_array['staff'][$staff_key]['name'] .
+                    "さんは" . $this_time . "時間働くと今週" . ($time_array['time'][0]['weekly_hours'] + $this_week_array[$staff_key]['weekly_hours']) . "時間働くことになるため除外されました。<br>";
                 $count++;
             }
             else if ($this_week_array[$staff_key]['weekly_hours'] > 8){
