@@ -1,6 +1,6 @@
 <?php
 //日付を引数として受け取り、
-function shift_view($year, $month, $day)
+function shift_view($folder, $year, $month, $day)
 {
     /*JSONデータ(スタッフ情報)の読み込み*/
     $staff_url = "../data/management/staff.json";
