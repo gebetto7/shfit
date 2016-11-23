@@ -1,14 +1,14 @@
 <?php
-function matching($folder, $year, $month, $day){
+function matching($staff_array, $folder, $year, $month, $day){
     //シフト情報の取得
     $shift_url = "../data/shift/original/" . $year . $month . $day . ".json";
     $json = file_get_contents($shift_url);
     $shift_array = json_decode($json, true);
 
     /*JSONデータ(スタッフ情報)の読み込み*/
-    $staff_url = "../data/management/staff.json";
-    $json = file_get_contents($staff_url);
-    $staff_array = json_decode($json,true);
+    //$staff_url = "../data/management/staff.json";
+    //$json = file_get_contents($staff_url);
+    //$staff_array = json_decode($json,true);
 
     $time_zone_url = "../data/management/time_zone.json";
     $json = file_get_contents($time_zone_url);
@@ -18,6 +18,7 @@ function matching($folder, $year, $month, $day){
     $candidate_count = 0;       //法律を越えていない候補者数をカウント
     $candidate_array['shift'] = array();    //候補者を入れる配列
     $main_array['shift'] = array();         //シフト表になる配列
+    $message_array = "";
 
     //スタッフ分の今週の勤務時間計算のための配列確保
     $this_week_array = array();
@@ -41,20 +42,27 @@ function matching($folder, $year, $month, $day){
 
             //法律をオーバーしてる人物を除く
             if ($time_array['time'][0]['weekly_hours'] >= 40){
-                echo $time_zone_array['time_zone'][$time_zone_count]['name'] . "：" . $staff_array['staff'][$staff_key]['name'] . "さんは今週" . $time_array['time'][0]['weekly_hours'] . "時間働いているため除外されました。<br>";
+                //echo $time_zone_array['time_zone'][$time_zone_count]['name'] . "：" . $staff_array['staff'][$staff_key]['name'] . "さんは今週" . $time_array['time'][0]['weekly_hours'] . "時間働いているため除外されました。<br>";
+                $message_array .= $time_zone_array['time_zone'][$time_zone_count]['name'] . "：" . $staff_array['staff'][$staff_key]['name'] . "さんは今週" . $time_array['time'][0]['weekly_hours'] . "時間働いているため除外されました。<br>";
+                echo $message_array;
+                echo "<br>";
                 $count++;
             }
             else if (($time_array['time'][0]['weekly_hours'] + $this_week_array[$staff_key]['weekly_hours']) > 40){
-                echo $time_zone_array['time_zone'][$time_zone_count]['name'] . "：" . $staff_array['staff'][$staff_key]['name'] .
+                //echo $time_zone_array['time_zone'][$time_zone_count]['name'] . "：" . $staff_array['staff'][$staff_key]['name'] .
+                    //"さんは" . $this_time . "時間働くと今週" . ($time_array['time'][0]['weekly_hours'] + $this_week_array[$staff_key]['weekly_hours']) . "時間働くことになるため除外されました。<br>";
+                $message_array .= $time_zone_array['time_zone'][$time_zone_count]['name'] . "：" . $staff_array['staff'][$staff_key]['name'] .
                     "さんは" . $this_time . "時間働くと今週" . ($time_array['time'][0]['weekly_hours'] + $this_week_array[$staff_key]['weekly_hours']) . "時間働くことになるため除外されました。<br>";
                 $count++;
             }
             else if ($this_week_array[$staff_key]['weekly_hours'] > 8){
-                echo $time_zone_array['time_zone'][$time_zone_count]['name'] . "：" . $staff_array['staff'][$staff_key]['name'] . "さんは一日で" . $this_week_array[$staff_key]['weekly_hours'] . "時間働いているため除外されました。<br>";
+                //echo $time_zone_array['time_zone'][$time_zone_count]['name'] . "：" . $staff_array['staff'][$staff_key]['name'] . "さんは一日で" . $this_week_array[$staff_key]['weekly_hours'] . "時間働いているため除外されました。<br>";
+                $message_array .= $time_zone_array['time_zone'][$time_zone_count]['name'] . "：" . $staff_array['staff'][$staff_key]['name'] . "さんは一日で" . $this_week_array[$staff_key]['weekly_hours'] . "時間働いているため除外されました。<br>";
                 $count++;
             }
             else if ($this_week_array[$staff_key]['weekly_hours'] > 8){
-                echo $time_zone_array['time_zone'][$time_zone_count]['name'] . "：" . $staff_array['staff'][$staff_key]['name'] . "さんは一日で" . $this_week_array[$staff_key]['weekly_hours'] . "時間働いているため除外されました。<br>";
+                //echo $time_zone_array['time_zone'][$time_zone_count]['name'] . "：" . $staff_array['staff'][$staff_key]['name'] . "さんは一日で" . $this_week_array[$staff_key]['weekly_hours'] . "時間働いているため除外されました。<br>";
+                $message_array .= $time_zone_array['time_zone'][$time_zone_count]['name'] . "：" . $staff_array['staff'][$staff_key]['name'] . "さんは一日で" . $this_week_array[$staff_key]['weekly_hours'] . "時間働いているため除外されました。<br>";
                 $count++;
             }
             else {
@@ -115,4 +123,6 @@ function matching($folder, $year, $month, $day){
     $fjson = fopen("../data/shift/temp/" . $year . $month . $day . ".json", "w+b");
     fwrite($fjson, json_encode($main_array, JSON_UNESCAPED_UNICODE));
     fclose($fjson);
+
+    return $message_array;
 }
