@@ -4,9 +4,9 @@
     //-------------------------------------------------
     //習熟度のチェックとシフトに入っている人数のチェックを行う
     //===================================================
-    function mastery_check($year, $month, $day){
+    function mastery_check($folder, $year, $month, $day){
         //シフト情報の取得
-        $shift_url = "../data/shift/" . $year . $month . $day . "shift.json";
+        $shift_url = "../data/shift/temp/" . $year . $month . $day . ".json";
         $json = file_get_contents($shift_url);
         $shift_array = json_decode($json, true);
 

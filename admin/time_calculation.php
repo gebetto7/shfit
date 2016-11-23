@@ -1,5 +1,5 @@
 <?php
-    function time_calculation($year, $month, $day)
+    function time_calculation($folder, $year, $month, $day)
     {
         //時給データの取得
         $wage_url = "../data/management/time_zone.json";
@@ -7,7 +7,7 @@
         $wage = json_decode($json, true);
 
         /*JSONデータ(シフト情報)の読み込み*/
-        $shift_url = "../data/shift/" . $year . $month . $day . "shift.json";
+        $shift_url = "../data/shift/temp/" . $year . $month . $day . ".json";
         $json = file_get_contents($shift_url);
         $shift_array = json_decode($json, true);
 

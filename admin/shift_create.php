@@ -12,6 +12,7 @@
         include 'mastery_check.php';
         include 'time_check.php';
         include 'matching.php';
+        include 'confirmation_screen.php';
 
         //シフト表を最終作成日の取得
         $last_url = "../data/shift/last.json";
@@ -28,10 +29,10 @@
             //日にちの妥当性の判断については、別途関数を用意し、そこで判断して正しかった場合通常動作、正しくなかった場合は月及び年の繰り上げを行う
             //そのための関数を用意する
             
-            matching($last['year'], $last['month'], $last['day']);    //希望表からシフト表を作成
-            mastery_check($last['year'], $last['month'], $last['day']);
-            shift_view($last['year'], $last['month'], $last['day']);
-            time_calculation($last['year'], $last['month'], $last['day']);
+            matching("original", $last['year'], $last['month'], $last['day']);    //希望表からシフト表を作成
+            mastery_check("temp", $last['year'], $last['month'], $last['day']);
+            shift_view("temp", $last['year'], $last['month'], $last['day']);
+            time_calculation("temp", $last['year'], $last['month'], $last['day']);
             $last['day']++;
             echo "<br><br>";
         }

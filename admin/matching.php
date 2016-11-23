@@ -1,7 +1,7 @@
 <?php
-function matching($year, $month, $day){
+function matching($folder, $year, $month, $day){
     //シフト情報の取得
-    $shift_url = "../data/shift/original/" . $year . $month . $day . "original.json";
+    $shift_url = "../data/shift/original/" . $year . $month . $day . ".json";
     $json = file_get_contents($shift_url);
     $shift_array = json_decode($json, true);
 
@@ -112,7 +112,7 @@ function matching($year, $month, $day){
         $candidate_count = 0;
     }
 
-    $fjson = fopen("../data/shift/" . $year . $month . $day . "shift.json", "w+b");
+    $fjson = fopen("../data/shift/temp/" . $year . $month . $day . ".json", "w+b");
     fwrite($fjson, json_encode($main_array, JSON_UNESCAPED_UNICODE));
     fclose($fjson);
 }
