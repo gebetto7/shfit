@@ -1,5 +1,5 @@
 <?php
-function matching($staff_array, $folder, $year, $month, $day){
+function matching($staff_array, $year, $month, $day){
     //シフト情報の取得
     $shift_url = "../data/shift/original/" . $year . $month . $day . ".json";
     $json = file_get_contents($shift_url);

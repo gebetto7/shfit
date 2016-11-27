@@ -2,11 +2,6 @@
     //引数としてシフト表のurlを受け取り、そのシフト表を時間が早い順に整理する
     function swap($url)
     {
-        //シフト表を最終作成日の取得
-        $last_url = "../data/shift/last.json";
-        $json = file_get_contents($last_url);
-        $last = json_decode($json, true);
-
         /*JSONデータ(シフト情報)の読み込み*/
         $json = file_get_contents($url);
         $shift_array = json_decode($json, true);

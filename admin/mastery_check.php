@@ -6,7 +6,7 @@
     //===================================================
     function mastery_check($folder, $year, $month, $day){
         //シフト情報の取得
-        $shift_url = "../data/shift/temp/" . $year . $month . $day . ".json";
+        $shift_url = "../data/shift/" . $folder . "/" . $year . $month . $day . ".json";
         $json = file_get_contents($shift_url);
         $shift_array = json_decode($json, true);
 

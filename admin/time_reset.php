@@ -1,5 +1,4 @@
 <?php
-    header("Content-Type: application/json; charset=utf-8");
     /*JSONデータ(スタッフ情報)の読み込み*/
     $staff_url = "../data/management/staff.json";
     $json = file_get_contents($staff_url);

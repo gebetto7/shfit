@@ -6,41 +6,36 @@
 </head>
 <body>
     <?php
+        if (isset($_GET['day'])){
+            $day_array = $_GET['day'];
+
+            $year  = strstr($day_array, "/", TRUE);
+            $month = strstr(substr(strstr($day_array, "/"), 1), "/", TRUE);
+            $day = strstr(substr(strstr(substr(strstr($day_array, "/"), 1), "/"), 1), "～", TRUE);
+        }
+        else{
+            echo "error<br>";
+        }
         include 'shift_swap.php';
         include 'time_calculation.php';   //勤務合計時間算出
-        include 'shift_view_func.php';  //シフト閲覧
+        include 'shift_view.php';  //シフト閲覧
         include 'mastery_check.php';
-        include 'time_check.php';
         include 'matching.php';
-        include 'confirmation_screen.php';
-
-        //シフト表を最終作成日の取得
-        $last_url = "../data/shift/last.json";
-        $json = file_get_contents($last_url);
-        $last = json_decode($json, true);
-        $last['day']++;
 
         /*JSONデータ(スタッフ情報)の読み込み*/
         $staff_url = "../data/management/staff.json";
         $json = file_get_contents($staff_url);
         $staff_array = json_decode($json,true);
-    
+
         for ($count = 0; $count <= 6; $count++){
-            //日にちの妥当性の判断については、別途関数を用意し、そこで判断して正しかった場合通常動作、正しくなかった場合は月及び年の繰り上げを行う
-            //そのための関数を用意する
-            
-            $message[$count] = matching($staff_array, "original", $last['year'], $last['month'], $last['day']);    //希望表からシフト表を作成
-            //confirmation_screen($message, $last['year'], $last['month'], $last['day']);
-            //mastery_check("temp", $last['year'], $last['month'], $last['day']);
-            //shift_view("temp", $last['year'], $last['month'], $last['day']);
-            //time_calculation("temp", $last['year'], $last['month'], $last['day']);
-            $last['day']++;
-            echo "<br><br>";
+            matching($staff_array, $year, $month, $day);    //希望表からシフト表を作成
+            mastery_check("temp", $year, $month, $day);
+            shift_view("temp", $year, $month, $day);
+            time_calculation("temp", $year, $month, $day);
+            $day++;
         }
-        echo "<form action = 'confirmation_screen.php' method = 'post'>";
-        echo "<input type = 'submit' name = ''>";
         //confirmation_screen($message, $last['year'], $last['month'], $last['day']);
-        /*for ($count = 0; $count < sizeof($staff_array['staff']); $count++){
+        for ($count = 0; $count < sizeof($staff_array['staff']); $count++){
             //週間時間と日数のリセット
             $time_url = "../data/time/time" . $count . ".json";
             $json = file_get_contents($time_url);
@@ -53,7 +48,13 @@
             $fjson = fopen($time_url, "w+b");
             fwrite($fjson, json_encode($time, JSON_UNESCAPED_UNICODE));
             fclose($fjson);
-        }*/
+        }
+        echo "以上の内容でよろしいですか？<br>";
+        echo "<form action = 'shift_enter.php' method = 'get'>";
+        echo "<button type = 'submit' name = '' value = ''>確定</button>";
+        echo "<button type = 'submit' name = '' value = '$day1'></button><br><br>";
+        echo "</form>";
+        echo "<button type = 'button' name = '' value = ''></button>";
     ?>
 </body>
 </html>
