@@ -16,6 +16,14 @@
         else{
             echo "error<br>";
         }
+        //tempフォルダの初期化
+        $path = '../data/shift/temp';
+        $res_dir = opendir( $path );
+        while ( $file_name = readdir( $res_dir ) ){
+            if (is_file($path. "/" .$file_name)) {
+                unlink($path . "/" . $file_name);
+            }
+        }
         include 'shift_swap.php';
         include 'time_calculation.php';   //勤務合計時間算出
         include 'shift_view.php';  //シフト閲覧
@@ -28,13 +36,14 @@
         $staff_array = json_decode($json,true);
 
         for ($count = 0; $count <= 6; $count++){
-            matching($staff_array, $year, $month, $day);    //希望表からシフト表を作成
+            $message = matching($staff_array, $year, $month, $day);    //希望表からシフト表を作成
             mastery_check("temp", $year, $month, $day);
             shift_view("temp", $year, $month, $day);
             time_calculation("temp", $year, $month, $day);
             $day++;
+            echo $message . "<br>";
         }
-        //confirmation_screen($message, $last['year'], $last['month'], $last['day']);
+        $day -= 7;  //日情報を戻す
         for ($count = 0; $count < sizeof($staff_array['staff']); $count++){
             //週間時間と日数のリセット
             $time_url = "../data/time/time" . $count . ".json";
@@ -51,10 +60,19 @@
         }
         echo "以上の内容でよろしいですか？<br>";
         echo "<form action = 'shift_enter.php' method = 'get'>";
-        echo "<button type = 'submit' name = '' value = ''>確定</button>";
-        echo "<button type = 'submit' name = '' value = '$day1'></button><br><br>";
-        echo "</form>";
-        echo "<button type = 'button' name = '' value = ''></button>";
+        //hidden属性
+        //日付情報
+        echo "<input type = 'hidden' name = 'year' value = '$year'>";
+        echo "<input type = 'hidden' name = 'month' value = '$month'>";
+        echo "<input type = 'hidden' name = 'day' value = '$day'>";
+        //候補者情報
+
+        echo "<button type = 'submit' name = 'action' value = 'enter'>確定</button>";
+        echo "<button type = 'submit' name = 'action' value = 'modify'>修正</button>
+                </form><br><br>";
+        echo "<form action = 'shift_create_selectday.php'>";
+        echo "<button type = 'submit'>戻る</button>
+                </form>";
     ?>
 </body>
 </html>

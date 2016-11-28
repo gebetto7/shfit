@@ -68,21 +68,9 @@
     echo "<input type = 'submit' name = 'day' value = '$day3'><br><br>";
     echo "<input type = 'submit' name = 'day' value = '$day4'><br><br>";
     echo "</form>";
-    //confirmation_screen($message, $last['year'], $last['month'], $last['day']);
-    /*for ($count = 0; $count < sizeof($staff_array['staff']); $count++){
-        //週間時間と日数のリセット
-        $time_url = "../data/time/time" . $count . ".json";
-        $json = file_get_contents($time_url);
-        $time = json_decode($json, true);
-
-        $time['time'][0]['weekly_hours'] = 0;
-        $time['time'][0]['weekly_days'] = 0;
-
-        //合計時間のjsonファイルへの書き出し
-        $fjson = fopen($time_url, "w+b");
-        fwrite($fjson, json_encode($time, JSON_UNESCAPED_UNICODE));
-        fclose($fjson);
-    }*/
+    echo "<form action = 'admin_index.php'>";
+    echo "<button type = 'submit'>戻る</button>
+            </form>";
 ?>
 </body>
 </html>

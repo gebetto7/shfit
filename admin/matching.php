@@ -10,9 +10,19 @@ function matching($staff_array, $year, $month, $day){
     //$json = file_get_contents($staff_url);
     //$staff_array = json_decode($json,true);
 
+    //時間帯情報の読み込み
     $time_zone_url = "../data/management/time_zone.json";
     $json = file_get_contents($time_zone_url);
     $time_zone_array = json_decode($json, true);
+
+    //候補者データの読み込み
+    $candidate_url = "../data/shift/temp/candidate/" . $year . $month . $day .".json";
+    if (file_exists($candidate_url)){}
+    else{
+        file_put_contents($candidate_url, "");
+    }
+
+
 
     $count = 0;     //シフトを頭から参照するためのカウントキー
     $candidate_count = 0;       //法律を越えていない候補者数をカウント
@@ -52,7 +62,7 @@ function matching($staff_array, $year, $month, $day){
                 //echo $time_zone_array['time_zone'][$time_zone_count]['name'] . "：" . $staff_array['staff'][$staff_key]['name'] .
                     //"さんは" . $this_time . "時間働くと今週" . ($time_array['time'][0]['weekly_hours'] + $this_week_array[$staff_key]['weekly_hours']) . "時間働くことになるため除外されました。<br>";
                 $message_array .= $time_zone_array['time_zone'][$time_zone_count]['name'] . "：" . $staff_array['staff'][$staff_key]['name'] .
-                    "さんは" . $this_time . "時間働くと今週" . ($time_array['time'][0]['weekly_hours'] + $this_week_array[$staff_key]['weekly_hours']) . "時間働くことになるため除外されました。<br>";
+                    "さんは" . $this_time . "時間働くと今週" . ($this_week_array[$staff_key]['weekly_hours'] + $this_time + $time_array['time'][0]['weekly_hours']) . "時間働くことになるため除外されました。<br>";
                 $count++;
             }
             else if ($this_week_array[$staff_key]['weekly_hours'] > 8){
@@ -115,11 +125,10 @@ function matching($staff_array, $year, $month, $day){
             $this_week_array[$candidate_array['shift'][0]['number']]['weekly_hours'] += $this_time;
             $this_week_array[$candidate_array['shift'][1]['number']]['weekly_hours'] += $this_time;
         }
-
+        var_dump($candidate_array);echo "<br><br>";
         $candidate_array['shift'] = array();    //候補者配列の初期化
         $candidate_count = 0;
     }
-
     $fjson = fopen("../data/shift/temp/" . $year . $month . $day . ".json", "w+b");
     fwrite($fjson, json_encode($main_array, JSON_UNESCAPED_UNICODE));
     fclose($fjson);
