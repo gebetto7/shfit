@@ -74,8 +74,6 @@
         echo "<input type = 'hidden' name = 'year' value = '$year'>";
         echo "<input type = 'hidden' name = 'month' value = '$month'>";
         echo "<input type = 'hidden' name = 'day' value = '$first_day'>";
-        //候補者情報
-
         echo "<button type = 'submit' name = 'action' value = 'enter'>確定</button>";
         echo "<button type = 'submit' name = 'action' value = 'modify'>修正</button>
                 </form><br><br>";

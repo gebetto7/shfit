@@ -52,27 +52,18 @@ function matching($staff_array, $year, $month, $day){
 
             //法律をオーバーしてる人物を除く
             if ($time_array['time'][0]['weekly_hours'] >= 40){
-                //echo $time_zone_array['time_zone'][$time_zone_count]['name'] . "：" . $staff_array['staff'][$staff_key]['name'] . "さんは今週" . $time_array['time'][0]['weekly_hours'] . "時間働いているため除外されました。<br>";
                 $message_array .= $time_zone_array['time_zone'][$time_zone_count]['name'] . "：" . $staff_array['staff'][$staff_key]['name'] . "さんは今週" . $time_array['time'][0]['weekly_hours'] . "時間働いているため除外されました。<br>";
                 echo $message_array;
                 echo "<br>";
                 $count++;
             }
+            else if ($this_week_array[$staff_key]['weekly_hours'] > 8){
+                $message_array .= $time_zone_array['time_zone'][$time_zone_count]['name'] . "：" . $staff_array['staff'][$staff_key]['name'] . "さんは一日で" . $this_week_array[$staff_key]['weekly_hours'] . "時間働いているため除外されました。<br>";
+                $count++;
+            }
             else if (($time_array['time'][0]['weekly_hours'] + $this_week_array[$staff_key]['weekly_hours']) > 40){
-                //echo $time_zone_array['time_zone'][$time_zone_count]['name'] . "：" . $staff_array['staff'][$staff_key]['name'] .
-                    //"さんは" . $this_time . "時間働くと今週" . ($time_array['time'][0]['weekly_hours'] + $this_week_array[$staff_key]['weekly_hours']) . "時間働くことになるため除外されました。<br>";
                 $message_array .= $time_zone_array['time_zone'][$time_zone_count]['name'] . "：" . $staff_array['staff'][$staff_key]['name'] .
                     "さんは" . $this_time . "時間働くと今週" . ($this_week_array[$staff_key]['weekly_hours'] + $this_time + $time_array['time'][0]['weekly_hours']) . "時間働くことになるため除外されました。<br>";
-                $count++;
-            }
-            else if ($this_week_array[$staff_key]['weekly_hours'] > 8){
-                //echo $time_zone_array['time_zone'][$time_zone_count]['name'] . "：" . $staff_array['staff'][$staff_key]['name'] . "さんは一日で" . $this_week_array[$staff_key]['weekly_hours'] . "時間働いているため除外されました。<br>";
-                $message_array .= $time_zone_array['time_zone'][$time_zone_count]['name'] . "：" . $staff_array['staff'][$staff_key]['name'] . "さんは一日で" . $this_week_array[$staff_key]['weekly_hours'] . "時間働いているため除外されました。<br>";
-                $count++;
-            }
-            else if ($this_week_array[$staff_key]['weekly_hours'] > 8){
-                //echo $time_zone_array['time_zone'][$time_zone_count]['name'] . "：" . $staff_array['staff'][$staff_key]['name'] . "さんは一日で" . $this_week_array[$staff_key]['weekly_hours'] . "時間働いているため除外されました。<br>";
-                $message_array .= $time_zone_array['time_zone'][$time_zone_count]['name'] . "：" . $staff_array['staff'][$staff_key]['name'] . "さんは一日で" . $this_week_array[$staff_key]['weekly_hours'] . "時間働いているため除外されました。<br>";
                 $count++;
             }
             else {
@@ -91,6 +82,8 @@ function matching($staff_array, $year, $month, $day){
             array_push($main_array['shift'], $candidate_array['shift'][0]); //そのまま入れる
             //確定した人の週間時間の計算
             $this_week_array[$candidate_array['shift'][0]['number']]['weekly_hours'] += $this_time;
+
+            $splice = array_splice($candidate_array['shift'], 0, 1);    //候補者配列から実際にシフトに入った人物を削除する
         }
         else if ($candidate_count > 1){    //二人以上いた場合
             //週間労働時間が短い順にソートする
@@ -120,12 +113,17 @@ function matching($staff_array, $year, $month, $day){
             //ソートした配列の1番目と2番目の人をシフトに入れる(candidate_arrayには候補者が残っている)
             array_push($main_array['shift'], $candidate_array['shift'][0]);
             array_push($main_array['shift'], $candidate_array['shift'][1]);
-
             //確定した人の週間時間の計算
             $this_week_array[$candidate_array['shift'][0]['number']]['weekly_hours'] += $this_time;
             $this_week_array[$candidate_array['shift'][1]['number']]['weekly_hours'] += $this_time;
+
+            $splice = array_splice($candidate_array['shift'], 0, 2);    //候補者配列から実際にシフトに入った人物を削除する
+            $candidate_array_file[$time_zone_array['time_zone'][$time_zone_count]['name']] = $candidate_array['shift'];
+            
+            $fjson = fopen($candidate_url, "w+b");
+            fwrite($fjson, json_encode($candidate_array_file, JSON_UNESCAPED_UNICODE));
+            fclose($fjson);
         }
-        var_dump($candidate_array);echo "<br><br>";
         $candidate_array['shift'] = array();    //候補者配列の初期化
         $candidate_count = 0;
     }

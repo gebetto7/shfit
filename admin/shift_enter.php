@@ -1,7 +1,7 @@
 <?php
 include 'check_date.php';
 if (isset($_GET['action'])){
-    if ($_GET['action'] == 'enter'){    //
+    if ($_GET['action'] == 'enter'){    //確定
         echo "シフト表を保存しました。<br>";
         echo "<form action = 'shift_create_selectday.php'>";
 
@@ -45,8 +45,59 @@ if (isset($_GET['action'])){
         echo "<button type = 'submit'>戻る</button>";
         echo "</form>";
     }
-    else{   //修正画面へ
-        header("Location: shift_modify.php");
+    else if($_GET['action'] == 'modify'){   //修正
+
+        $year = $_GET['year'];
+        $month = $_GET['month'];
+        $day = $_GET['day'];
+
+        /*JSONデータ(スタッフ情報)の読み込み*/
+        $staff_url = "../data/management/staff.json";
+        $json = file_get_contents($staff_url);
+        $staff_array = json_decode($json, true);
+        for ($count = 0; $count <= 6; $count++) {
+
+            $candidate_url = "../data/shift/temp/candidate/" . $year . $month . $day . ".json";
+            $json = file_get_contents($candidate_url);
+            $candidate_array = json_decode($json,true);
+
+            while ($key_name = current($candidate_array)){
+                echo key($candidate_array);
+                /*時間の表示(表)*/
+                echo '<table border="1" cellpadding="2"><tr><td></td>';
+                for ($a = 0; $a <= 23; $a++) {
+                    echo '<td>' . $a . '</td>';
+                }
+                echo '</tr>';
+
+                for ($shift_count = 0; $shift_count < sizeof($candidate_array['shift']); $shift_count++) {
+                    //シフト表1列表示部分
+                    //ここから
+                    echo '<tr>';
+                    /*従業員名の格納*/
+                    $number = $shift_array["shift"][$shift_count]["number"];
+                    /*従業員名の表示*/
+                    echo '<td>' . $staff_array['staff'][$number]['name'] . '</td>';
+
+                    /*時間表表示*/
+                    for ($time_count = 0; $time_count <= 23; $time_count++) {
+                        if ($shift_array['shift'][$shift_count]['min'] <= $time_count && $shift_array['shift'][$shift_count]['max'] > $time_count) {
+                            echo "<td>●</td>";
+                        } else {
+                            echo "<td>　</td>";
+                        }
+                    }
+                    echo '</tr>';
+                }
+                next($candidate_array);
+            }
+            echo '</table><br>';
+            $day++;
+        }
+
+    }
+    else{
+        echo "error<br>";
     }
 }
 else{
