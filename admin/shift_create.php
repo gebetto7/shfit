@@ -12,6 +12,7 @@
             $year  = strstr($day_array, "/", TRUE);
             $month = strstr(substr(strstr($day_array, "/"), 1), "/", TRUE);
             $day = strstr(substr(strstr(substr(strstr($day_array, "/"), 1), "/"), 1), "～", TRUE);
+            $first_day = $day;
         }
         else{
             echo "error<br>";
@@ -29,6 +30,7 @@
         include 'shift_view.php';  //シフト閲覧
         include 'mastery_check.php';
         include 'matching.php';
+        include 'check_date.php';
 
         /*JSONデータ(スタッフ情報)の読み込み*/
         $staff_url = "../data/management/staff.json";
@@ -36,14 +38,21 @@
         $staff_array = json_decode($json,true);
 
         for ($count = 0; $count <= 6; $count++){
+
             $message = matching($staff_array, $year, $month, $day);    //希望表からシフト表を作成
             mastery_check("temp", $year, $month, $day);
             shift_view("temp", $year, $month, $day);
             time_calculation("temp", $year, $month, $day);
+
             $day++;
+            //日付の更新
+            $day_array = check_date($year, $month, $day);
+            $year = $day_array['year'];
+            $month = $day_array['month'];
+            $day = $day_array['day'];
+
             echo $message . "<br>";
         }
-        $day -= 7;  //日情報を戻す
         for ($count = 0; $count < sizeof($staff_array['staff']); $count++){
             //週間時間と日数のリセット
             $time_url = "../data/time/time" . $count . ".json";
@@ -64,7 +73,7 @@
         //日付情報
         echo "<input type = 'hidden' name = 'year' value = '$year'>";
         echo "<input type = 'hidden' name = 'month' value = '$month'>";
-        echo "<input type = 'hidden' name = 'day' value = '$day'>";
+        echo "<input type = 'hidden' name = 'day' value = '$first_day'>";
         //候補者情報
 
         echo "<button type = 'submit' name = 'action' value = 'enter'>確定</button>";

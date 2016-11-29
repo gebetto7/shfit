@@ -11,6 +11,7 @@
     include 'shift_view.php';  //シフト閲覧
     include 'mastery_check.php';
     include 'matching.php';
+    include 'check_date.php';
 
     //シフト表を最終作成日の取得
     $last_url = "../data/shift/last.json";
