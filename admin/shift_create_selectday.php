@@ -11,6 +11,7 @@
     include 'shift_view.php';  //シフト閲覧
     include 'mastery_check.php';
     include 'matching.php';
+    include 'check_date.php';
 
     //シフト表を最終作成日の取得
     $last_url = "../data/shift/last.json";
@@ -63,26 +64,15 @@
 
     //日付の判定を行い、その日付をformのnameに表示する
     echo "<form action = 'shift_create.php' method = 'get'>";
+    echo "<input type = 'hidden' name = 'action' value = 'normal'>";
     echo "<input type = 'submit' name = 'day' value = '$day1'><br><br>";
     echo "<input type = 'submit' name = 'day' value = '$day2'><br><br>";
     echo "<input type = 'submit' name = 'day' value = '$day3'><br><br>";
     echo "<input type = 'submit' name = 'day' value = '$day4'><br><br>";
     echo "</form>";
-    //confirmation_screen($message, $last['year'], $last['month'], $last['day']);
-    /*for ($count = 0; $count < sizeof($staff_array['staff']); $count++){
-        //週間時間と日数のリセット
-        $time_url = "../data/time/time" . $count . ".json";
-        $json = file_get_contents($time_url);
-        $time = json_decode($json, true);
-
-        $time['time'][0]['weekly_hours'] = 0;
-        $time['time'][0]['weekly_days'] = 0;
-
-        //合計時間のjsonファイルへの書き出し
-        $fjson = fopen($time_url, "w+b");
-        fwrite($fjson, json_encode($time, JSON_UNESCAPED_UNICODE));
-        fclose($fjson);
-    }*/
+    echo "<form action = 'admin_index.php'>";
+    echo "<button type = 'submit'>戻る</button>
+            </form>";
 ?>
 </body>
 </html>
