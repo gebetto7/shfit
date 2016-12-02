@@ -155,8 +155,12 @@ if (isset($_GET['action'])){
         echo "<input type = 'hidden' name = 'day' value = '$first_day'>";
         echo "<button type = 'submit' name = 'action' value = 'enter'>確定</button>
                 </form>";
-        echo "<form action = 'shift_create_selectday.php'>";
-        echo "<button type = 'submit'>戻る</button>
+        echo "<form action = 'shift_create.php' method = 'get'>";
+        echo "<input type = 'hidden' name = 'year' value = '$year'>";
+        echo "<input type = 'hidden' name = 'month' value = '$month'>";
+        echo "<input type = 'hidden' name = 'day' value = '$first_day'>";
+        echo "<input type = 'hidden' name = 'modify' value = 'false'>";
+        echo "<button type = 'submit' name = 'action' value = 'back'>戻る</button>
                 </form>";
 
     }
@@ -168,6 +172,3 @@ else{
     echo "error<br>";
 }
 ?>
-<script language="JavaScript" type="text/javascript">
-    var
-</script>

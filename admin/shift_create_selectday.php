@@ -64,6 +64,7 @@
 
     //日付の判定を行い、その日付をformのnameに表示する
     echo "<form action = 'shift_create.php' method = 'get'>";
+    echo "<input type = 'hidden' name = 'action' value = 'normal'>";
     echo "<input type = 'submit' name = 'day' value = '$day1'><br><br>";
     echo "<input type = 'submit' name = 'day' value = '$day2'><br><br>";
     echo "<input type = 'submit' name = 'day' value = '$day3'><br><br>";
