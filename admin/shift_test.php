@@ -64,12 +64,9 @@ if (isset($_GET['action'])){
                     }
                     for ($x = 0; $x < (sizeof($candidate_array[$time_zone_array['time_zone'][$time_zone_count]['name']])); $x++){
                         if ($candidate_array[$time_zone_array['time_zone'][$time_zone_count]['name']][$x]['number'] == $modify_number){
-                            var_dump($candidate_array[$time_zone_array['time_zone'][$time_zone_count]['name']][$x]['number']);
-                            echo $shift_array['shift'][$count2]['number'] . "(交換される人)と" . $candidate_array[$time_zone_array['time_zone'][$time_zone_count]['name']][$x]['number'] . "(交換する人)<br>";
                             $swap = $candidate_array[$time_zone_array['time_zone'][$time_zone_count]['name']][$x]['number'];
                             $candidate_array[$time_zone_array['time_zone'][$time_zone_count]['name']][$x]['number'] = $shift_array['shift'][$count2]['number'];
                             $shift_array['shift'][$count2]['number'] = $swap;
-                            echo $shift_array['shift'][$count2]['number'] . "(交換される人)と" . $candidate_array[$time_zone_array['time_zone'][$time_zone_count]['name']][$x]['number'] . "(交換する人)<br>";
                         }
                     }
                 }
@@ -81,7 +78,7 @@ if (isset($_GET['action'])){
             $numberp = 0;
         }
         //temp_modifyの作成
-        $fjson = fopen("../data/shift/temp/" . $year . $month . $day . ".json", "w+b");
+        $fjson = fopen("../data/shift/temp/modify/" . $year . $month . $day . ".json", "w+b");
         fwrite($fjson, json_encode($shift_array, JSON_UNESCAPED_UNICODE));
         fclose($fjson);
 

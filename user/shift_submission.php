@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset='utf-8'>
-    <title>シフト表作成</title>
+    <title>シフト表提出</title>
 </head>
 <body>
 <?php
