@@ -2,7 +2,17 @@
 <head>
 </head>
 <body>
-<button type="button" onclick="location.href='shift_create_selectday.php'">シフト表作成</button></br></br>
-<button type="button" onclick="location.href='shift_view.php'">シフト表確認</button></br></br>
+<?php
+    $ID = $_GET['ID'];
+    echo "<form action = 'submission_selectday.php' method = 'get'>";
+    echo "<input type = 'hidden' name = 'ID' value = '$ID'>";
+    echo "<button type = 'submit'>シフト表提出</button>";
+    echo "</form>";
+
+    echo "<form action = '../admin/shift_view.php' method = 'get'>";
+    echo "<input type = 'hidden' name = 'ID' value = '$ID'>";
+    echo "<button type = 'submit'>シフト表閲覧</button>";
+    echo "</form>";
+?>
 </body>
 </html>

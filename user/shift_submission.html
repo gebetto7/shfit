@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>シフト希望送信</title>
+    <script type="text/javascript" src="../data/jQuery/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+<table id ="dayoftheweek" border="1" cellpadding="2">
+    <tr>
+        <td>日</td>
+        <td>月</td>
+        <td>火</td>
+        <td>水</td>
+        <td>木</td>
+        <td>金</td>
+        <td>土</td>
+    </tr>
+</table>
+<div id = "timezone"></div>
+<script>
+    //セルに対してのクリック感知
+    $("#dayoftheweek td").bind('click', function(){
+        hideToggle($('.hidearea'));
+        $tag_td = $(this)[0];
+        $tag_tr = $(this).parent()[0];
+        console.log("%s列, %s行", $tag_td.cellIndex, $tag_tr.rowIndex);
+    });
+
+    hideToggle($('.hidearea'));
+    var speed = 500; //表示アニメのスピード（ミリ秒）
+    var stateDeliv = 1;
+    function hideToggle(hidearea) {
+        hidearea.toggle(speed);
+    }
+
+    window.onload  = function() {
+        var count = 0;
+        //選択した曜日のテーブルを表示
+        for (var i = 0; i <= 6; i++) {   //日～土まで
+            document.getElementById("timezone").innerHTML += "<table><tr id = 'time" + i + "'>";
+            console.log("#time" + i);
+            console.log("GG");
+            $.getJSON("../data/management/time_zone.json", function (data) {
+                $(data.time_zone).each(function(){  //時間帯の数だけループされる
+                    var $ul = $('<td>');
+                    $ul.append((this.name));
+                    $ul.append('</td>');
+                    console.log(i);
+                    $("#time" + i).append($ul);
+                });
+            });
+            document.getElementById("timezone").innerHTML += "</tr></table>";
+        }
+    }
+</script>
+</body>
+</html>
