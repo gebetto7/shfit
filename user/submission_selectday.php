@@ -54,6 +54,7 @@ $day4 = $day_array[21]['year'] . "/" . $day_array[21]['month'] . "/" . $day_arra
 //日付の判定を行い、その日付をformのnameに表示する
 echo "<form action = 'shift_submission.php' method = 'get'>";
 echo "<input type = 'hidden' name = 'ID' value = '$ID'>";
+echo "<input type = 'hidden' name = 'action' value = 'normal'>";
 echo "<input type = 'submit' name = 'day' value = '$day1'><br><br>";
 echo "<input type = 'submit' name = 'day' value = '$day2'><br><br>";
 echo "<input type = 'submit' name = 'day' value = '$day3'><br><br>";

@@ -17,13 +17,10 @@ function matching($staff_array, $year, $month, $day){
 
     //候補者データの読み込み
     $candidate_url = "../data/shift/temp/candidate/" . $year . $month . $day .".json";
-    if (file_exists($candidate_url)){}
-    else{
+    if (!file_exists($candidate_url)){
         file_put_contents($candidate_url, "");
     }
-
-
-
+    
     $count = 0;     //シフトを頭から参照するためのカウントキー
     $candidate_count = 0;       //法律を越えていない候補者数をカウント
     $candidate_array['shift'] = array();    //候補者を入れる配列
