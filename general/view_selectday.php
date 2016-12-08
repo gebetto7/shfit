@@ -2,11 +2,16 @@
 <html>
 <head>
     <meta charset='utf-8'>
-    <title>シフト表提出-週選択-</title>
+    <title>シフト表閲覧-週選択-</title>
 </head>
 <body>
 <?php
-$ID = $_GET['ID'];
+if (isset($_GET['ID'])){
+    $ID = $_GET['ID'];
+}
+else{
+    $ID = 999;
+}
 //シフト表を最終作成日の取得
 $last_url = "../data/shift/last.json";
 $json = file_get_contents($last_url);
@@ -52,7 +57,7 @@ $day3 = $day_array[14]['year'] . "/" . $day_array[14]['month'] . "/" . $day_arra
 $day4 = $day_array[21]['year'] . "/" . $day_array[21]['month'] . "/" . $day_array[21]['day'] . "～" . $day_array[27]['year'] . "/" . $day_array[27]['month'] . "/" . $day_array[27]['day'];
 
 //日付の判定を行い、その日付をformのnameに表示する
-echo "<form action = 'shift_submission.php' method = 'get'>";
+echo "<form action = 'shiftview.php' method = 'get'>";
 echo "<input type = 'hidden' name = 'ID' value = '$ID'>";
 echo "<input type = 'hidden' name = 'action' value = 'normal'>";
 echo "<input type = 'submit' name = 'day' value = '$day1'><br><br>";
@@ -60,10 +65,16 @@ echo "<input type = 'submit' name = 'day' value = '$day2'><br><br>";
 echo "<input type = 'submit' name = 'day' value = '$day3'><br><br>";
 echo "<input type = 'submit' name = 'day' value = '$day4'><br><br>";
 echo "</form>";
-echo "<form action = 'user_index.php'>";
-echo "<input type = 'hidden' name = 'ID' value = '$ID'>";
-echo "<button type = 'submit'>戻る</button>
-            </form>";
+if ($ID == 999){
+    echo "<form action = '../admin/admin_index.php' method = 'get'>";
+    echo "<input type = 'hidden' name = 'ID' value = '$ID'>";
+    echo "<button type = 'submit'>戻る</button></form>";
+}
+else {
+    echo "<form action = '../user/user_index.php' method = 'get'>";
+    echo "<input type = 'hidden' name = 'ID' value = '$ID'>";
+    echo "<button type = 'submit'>戻る</button></form>";
+}
 ?>
 </body>
 </html>

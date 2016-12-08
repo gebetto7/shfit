@@ -2,13 +2,13 @@
 <html>
 <head>
     <meta charset='utf-8'>
-    <title>シフト表作成</title>
+    <title>シフト表作成-週選択-</title>
 </head>
 <body>
 <?php
     include 'shift_swap.php';
     include 'time_calculation.php';   //勤務合計時間算出
-    include 'shift_view.php';  //シフト閲覧
+    include '../general/shift_view.php';  //シフト閲覧
     include 'mastery_check.php';
     include 'matching.php';
     include 'check_date.php';
@@ -65,6 +65,7 @@
     //日付の判定を行い、その日付をformのnameに表示する
     echo "<form action = 'shift_create.php' method = 'get'>";
     echo "<input type = 'hidden' name = 'action' value = 'normal'>";
+    echo "<input type = 'hidden' name = 'modify' value = 'false'>";
     echo "<input type = 'submit' name = 'day' value = '$day1'><br><br>";
     echo "<input type = 'submit' name = 'day' value = '$day2'><br><br>";
     echo "<input type = 'submit' name = 'day' value = '$day3'><br><br>";

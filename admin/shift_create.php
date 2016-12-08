@@ -2,13 +2,13 @@
 <html>
 <head>
     <meta charset='utf-8'>
-    <title>シフト表作成</title>
+    <title>シフト表作成-確認-</title>
 </head>
 <body>
     <?php
     include 'shift_swap.php';
     include 'time_calculation.php';   //勤務合計時間算出
-    include 'shift_view.php';  //シフト閲覧
+    include '../general/shift_view.php';  //シフト閲覧
     include 'mastery_check.php';
     include 'matching.php';
     include 'check_date.php';

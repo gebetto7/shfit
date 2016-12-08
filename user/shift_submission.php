@@ -1,3 +1,10 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>シフト表提出-日時選択-</title>
+</head>
+<body>
 <?php
 include '../admin/check_date.php';
 
@@ -43,4 +50,6 @@ echo "<input type = 'hidden' name = 'month' value = '$month'>";
 echo "<input type = 'hidden' name = 'day' value = '$first_day'>";
 echo "<button type = 'submit' >確定</button>";
 
-
+?>
+</body>
+</html>

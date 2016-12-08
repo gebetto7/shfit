@@ -1,3 +1,10 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>シフト表提出-確認-</title>
+</head>
+<body>
 <?php
 include '../admin/check_date.php';
 include '../admin/shift_swap.php';
@@ -32,7 +39,7 @@ for ($x = 0; $x <= 6; $x++){
         }
     }
 
-    $url = "../data/shift/test/" . $year . $month . $day . ".json";
+    $url = "../data/shift/original/" . $year . $month . $day . ".json";
     if (!file_exists($url)){    //ファイルが存在しなかった場合、作成してから保存する
         file_put_contents($url, "");
         $fjson = fopen($url, "w+b");
@@ -44,8 +51,10 @@ for ($x = 0; $x <= 6; $x++){
         $shift_array = json_decode($json, true);
         $overlapf = 0;
         for ($count =0; $count < sizeof($array['shift']); $count++){//出勤希望の数だけ
-            for ($count2 = 0; $count < sizeof($shift_array['shift']); $count2++) {    //既に希望が出てる人数分だけ
-                if ($shift_array['shift'][$count2]['number'] == $array['shift'][$count]['number']){ //既に提出があるものは省く
+            for ($count2 = 0; $count2 < sizeof($shift_array['shift']); $count2++) {    //既に希望が出てる人数分だけ
+                if (($shift_array['shift'][$count2]['number'] == $array['shift'][$count]['number'])
+                    && ($shift_array['shift'][$count2]['min'] == $array['shift'][$count]['min'])
+                    && ($shift_array['shift'][$count2]['max'] == $array['shift'][$count]['max'])){ //既に提出があるものは省く
                     echo "既にこの時間帯に出勤希望を提出しています。<br>";
                     $overlapf = 1;
                     break;
@@ -73,5 +82,9 @@ for ($x = 0; $x <= 6; $x++){
 
 }
 echo "<form action = 'submission_selectday.php'>";
+echo "<input type = 'hidden' name = 'ID' value = '$ID'>";
 echo "<button type = 'submit'>戻る</button>
              </form>";
+?>
+</body>
+</html>

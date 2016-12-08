@@ -1,3 +1,10 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>シフト表作成</title>
+</head>
+<body>
 <?php
 include 'check_date.php';
 if (isset($_GET['action'])){
@@ -8,7 +15,7 @@ if (isset($_GET['action'])){
         $year = $_GET['year'];
         $month = $_GET['month'];
         $day = $_GET['day'];
-        
+
         // シフト情報の読み込み
         for ($count = 0; $count <= 6; $count++){
             $shift_url = "../data/shift/temp/" . $year . $month . $day . ".json";
@@ -172,3 +179,5 @@ else{
     echo "error<br>";
 }
 ?>
+</body>
+</html>

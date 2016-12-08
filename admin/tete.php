@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>シフト表作成-修正確認-</title>
+    <title></title>
 </head>
 <body>
 <?php

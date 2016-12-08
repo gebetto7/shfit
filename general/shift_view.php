@@ -2,6 +2,11 @@
 //日付を引数として受け取り、
 function shift_view($folder, $year, $month, $day)
 {
+    $shift_url = "../data/shift/" . $folder . "/" . $year . $month . $day . ".json";
+    if (!file_exists($shift_url)){
+        echo $year . "年" . $month . "月" . $day . "日のシフト表はまだ作成されていません。<br>";
+        return 0;
+    }
     /*JSONデータ(スタッフ情報)の読み込み*/
     $staff_url = "../data/management/staff.json";
     $json = file_get_contents($staff_url);
@@ -9,8 +14,8 @@ function shift_view($folder, $year, $month, $day)
 
     /*日付の表示*/
     echo $year . "年" . $month . "月" . $day . "日<br>";
+
     /*JSONデータ(シフト情報)の読み込み*/
-    $shift_url = "../data/shift/" . $folder . "/" . $year . $month . $day . ".json";
     swap($shift_url);
     $json = file_get_contents($shift_url);
     $shift_array = json_decode($json, true);
