@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>シフト表作成</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 <?php
@@ -49,7 +50,7 @@ if (isset($_GET['action'])){
                 unlink($path . "/" . $file_name);
             }
         }
-        echo "<button type = 'submit'>戻る</button>";
+        echo "<button type = 'submit' class=\"btn btn-warning\">戻る</button>";
         echo "</form>";
     }
 //=============================================================================================
@@ -70,7 +71,7 @@ if (isset($_GET['action'])){
         $json = file_get_contents($time_zone_url);
         $time_zone_array = json_decode($json, true);
 
-        echo "<form action = 'shift_test.php' method = 'get'>";
+        echo "<form class=\"form-inline\" action = 'shift_test.php' method = 'get'>";
 
         for ($count = 0; $count <= 6; $count++) {
 
@@ -92,11 +93,11 @@ if (isset($_GET['action'])){
                 echo $time_zone_array['time_zone'][$time_zone_count]['name'] . "<br>";
 
                 /*時間の表示(表)*/
-                echo '<table border="1" cellpadding="2"><tr><td></td>';
+                echo '<table class="table table-bordered"><thead><tr><td></td>';
                 for ($a = 0; $a <= 23; $a++) {
                     echo '<td>' . $a . '</td>';
                 }
-                echo '</tr>';
+                echo '</tr></thead>';
 
                 while (($count2 < sizeof($shift_array['shift'])) &&
                     ($shift_array['shift'][$count2]['min'] == $time_zone_array['time_zone'][$time_zone_count]['min']) &&
@@ -134,17 +135,17 @@ if (isset($_GET['action'])){
 
                 echo "候補者1";
                 $submit_name1 = "change1_" . $count . "_" . $time_zone_count;
-                echo "<select name = '$submit_name1'>";
+                echo "<select class=\"form-control\" name = '$submit_name1'>";
                 echo "<option value = '$candidate1'>$candidate1</option>";
                 for ($x = 0; $x < sizeof($candidate_array[$time_zone_now]); $x++){
                     $candidate_name_key = $candidate_array[$time_zone_now][$x]['number'];
                     $candidate_name = $staff_array['staff'][$candidate_name_key]['name'];
                     echo "<option name = '$candidate_name'>$candidate_name</option>";
                 }
-                echo "</select><br><br>";
+                echo "</select>";
                 echo "候補者2";
                 $submit_name2 = "change2_" . $count . "_" . $time_zone_count;
-                echo "<select name = '$submit_name2'>";
+                echo "<select class=\"form-control\" name = '$submit_name2'>";
                 echo "<option value = '$candidate2'>$candidate2</option>";
                 for ($x = 0; $x < sizeof($candidate_array[$time_zone_now]); $x++){
                     $candidate_name_key = $candidate_array[$time_zone_now][$x]['number'];
@@ -157,18 +158,21 @@ if (isset($_GET['action'])){
             $day++;
             echo "<br><br>";
         }
+        echo "<div class='form-group'>";
         echo "<input type = 'hidden' name = 'year' value = '$year'>";
         echo "<input type = 'hidden' name = 'month' value = '$month'>";
         echo "<input type = 'hidden' name = 'day' value = '$first_day'>";
-        echo "<button type = 'submit' name = 'action' value = 'enter'>確定</button>
-                </form>";
+        echo "<button type = 'submit' class=\"btn btn-success\" name = 'action' value = 'enter'>確定</button>";
+        echo "</div></form>";
+
         echo "<form action = 'shift_create.php' method = 'get'>";
+        echo "<div class='form-group'>";
         echo "<input type = 'hidden' name = 'year' value = '$year'>";
         echo "<input type = 'hidden' name = 'month' value = '$month'>";
         echo "<input type = 'hidden' name = 'day' value = '$first_day'>";
         echo "<input type = 'hidden' name = 'modify' value = 'false'>";
-        echo "<button type = 'submit' name = 'action' value = 'back'>戻る</button>
-                </form>";
+        echo "<br><button type = 'submit' class=\"btn btn-warning\" name = 'action' value = 'back'>戻る</button>";
+        echo "</div></form>";
 
     }
     else{

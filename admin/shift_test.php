@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>シフト表作成-修正確認-</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 <?php
@@ -107,9 +108,9 @@ if (isset($_GET['action'])){
     echo "<input type = 'hidden' name = 'month' value = '$month'>";
     echo "<input type = 'hidden' name = 'day' value = '$first_day'>";
     echo "<input type = 'hidden' name = 'modify' value = 'true'>";
-    echo "<br><button type = 'submit' name = 'action' value = 'back'>確定</button>
+    echo "<br><button type = 'submit' class=\"btn btn-success\" name = 'action' value = 'back'>確定</button>
                 </form>";
-    echo "<input type = 'button' value = '戻る' onclick = 'history.back();'>";
+    echo "<br><input type = 'button' class=\"btn btn-warning\" value = '戻る' onclick = 'history.back();'>";
 }
 else
     echo "error<br>";

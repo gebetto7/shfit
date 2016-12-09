@@ -3,6 +3,7 @@
 <head>
     <meta charset='utf-8'>
     <title>シフト表閲覧-週選択-</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 <?php
@@ -60,20 +61,28 @@ $day4 = $day_array[21]['year'] . "/" . $day_array[21]['month'] . "/" . $day_arra
 echo "<form action = 'shiftview.php' method = 'get'>";
 echo "<input type = 'hidden' name = 'ID' value = '$ID'>";
 echo "<input type = 'hidden' name = 'action' value = 'normal'>";
-echo "<input type = 'submit' name = 'day' value = '$day1'><br><br>";
-echo "<input type = 'submit' name = 'day' value = '$day2'><br><br>";
-echo "<input type = 'submit' name = 'day' value = '$day3'><br><br>";
-echo "<input type = 'submit' name = 'day' value = '$day4'><br><br>";
+echo "<div class='form-group'>";
+echo "<input type = 'submit' class=\"btn btn-default\" name = 'day' value = '$day1'>";
+echo "</div>";
+echo "<div class='form-group'>";
+echo "<input type = 'submit' class=\"btn btn-default\" name = 'day' value = '$day2'>";
+echo "</div>";
+echo "<div class='form-group'>";
+echo "<input type = 'submit' class=\"btn btn-default\" name = 'day' value = '$day3'>";
+echo "</div>";
+echo "<div class='form-group'>";
+echo "<input type = 'submit' class=\"btn btn-default\" name = 'day' value = '$day4'>";
+echo "</div>";
 echo "</form>";
 if ($ID == 999){
     echo "<form action = '../admin/admin_index.php' method = 'get'>";
     echo "<input type = 'hidden' name = 'ID' value = '$ID'>";
-    echo "<button type = 'submit'>戻る</button></form>";
+    echo "<button type = 'submit' class=\"btn btn-warning\">戻る</button></form>";
 }
 else {
     echo "<form action = '../user/user_index.php' method = 'get'>";
     echo "<input type = 'hidden' name = 'ID' value = '$ID'>";
-    echo "<button type = 'submit'>戻る</button></form>";
+    echo "<button type = 'submit' class=\"btn btn-warning\">戻る</button></form>";
 }
 ?>
 </body>

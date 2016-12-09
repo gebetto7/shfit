@@ -24,6 +24,9 @@
         $count = 0;
         $shift_count = 0;       //時間帯に何人入っているかの確認
 
+        $date = $year . $month . $day;
+        $shift_blank[$date] = Array();       //空いている時間帯保存用
+
         for ($time_zone_count = 0; $time_zone_count < sizeof($time_zone_array['time_zone']); $time_zone_count++) {
             while (($count < sizeof($shift_array['shift'])) &&
                 ($shift_array['shift'][$count]['min'] == $time_zone_array['time_zone'][$time_zone_count]['min']) &&
@@ -42,12 +45,20 @@
                     break;
                 case 1:     //一人足りない場合
                     echo $time_zone_array['time_zone'][$time_zone_count]['name'] . "の従業員が1人足りません。<br>";
+                    array_push($shift_blank[$date], $time_zone_array['time_zone'][$time_zone_count]['name']);
                     break;
                 case 0:     //一人も入っていない場合
                     echo $time_zone_array['time_zone'][$time_zone_count]['name'] . "に出勤可能な従業員がいません。<br>";
+                    array_push($shift_blank[$date], $time_zone_array['time_zone'][$time_zone_count]['name']);
+                    array_push($shift_blank[$date], $time_zone_array['time_zone'][$time_zone_count]['name']);
                     break;
             }
             $mastery_sum = 0;
             $shift_count  =0;
+        }
+        if ($shift_blank[$date]){
+            $fjson = fopen("../data/shift/blank/" . $year . $month . $day . ".json", "w+b");
+            fwrite($fjson, json_encode($shift_blank, JSON_UNESCAPED_UNICODE));
+            fclose($fjson);
         }
     }

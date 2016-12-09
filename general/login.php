@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>ログイン</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 <?php
@@ -17,10 +18,10 @@ if (isset($_GET['error'])){
     }
 }
 
-echo "従業員IDを入力してください。<br>";
-echo "<form action = 'login_dec.php' method = 'get'>";
-echo "<input type = 'number' name = 'ID' min = '1' max = '999'><br><br>";
-echo "<input type = 'submit' value = '送信'>";
+echo "<form action = 'login_dec.php' method = 'get' class = 'form-inline'>";
+echo "<div class = 'form-group'><label for = 'InputNumber' class='sr-only'>従業員No</label>";
+echo "<input type = 'number' class = 'form-control' id = 'InputNumber' placeholder='従業員No' name='ID' min = '1'></div>";
+echo "<button type = 'submit' class=\"btn btn-success\">送信</button>";
 echo "</form>";
 ?>
 </body>

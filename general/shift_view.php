@@ -21,11 +21,11 @@ function shift_view($folder, $year, $month, $day)
     $shift_array = json_decode($json, true);
 
     /*時間の表示(表)*/
-    echo '<table border="1" cellpadding="2"><tr><td></td>';
+    echo '<table class="table table-bordered"><thead><tr><td></td>';
     for ($a = 0; $a <= 23; $a++) {
         echo '<td>' . $a . '</td>';
     }
-    echo '</tr>';
+    echo '</tr></thead>';
 
     for ($shift_count = 0; $shift_count < sizeof($shift_array['shift']); $shift_count++) {
         //シフト表1列表示部分

@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset='utf-8'>
-    <title>シフト表提出-週選択-</title>
+    <title>欠員補充-週選択-</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
@@ -53,13 +53,20 @@ $day3 = $day_array[14]['year'] . "/" . $day_array[14]['month'] . "/" . $day_arra
 $day4 = $day_array[21]['year'] . "/" . $day_array[21]['month'] . "/" . $day_array[21]['day'] . "～" . $day_array[27]['year'] . "/" . $day_array[27]['month'] . "/" . $day_array[27]['day'];
 
 //日付の判定を行い、その日付をformのnameに表示する
-echo "<form action = 'shift_submission.php' method = 'get'>";
+echo "<form action = 'blank_fill.php' method = 'get'>";
 echo "<input type = 'hidden' name = 'ID' value = '$ID'>";
-echo "<input type = 'hidden' name = 'action' value = 'normal'>";
-echo "<input type = 'submit' class=\"btn btn-default\" name = 'day' value = '$day1'><br><br>";
-echo "<input type = 'submit' class=\"btn btn-default\" name = 'day' value = '$day2'><br><br>";
-echo "<input type = 'submit' class=\"btn btn-default\" name = 'day' value = '$day3'><br><br>";
-echo "<input type = 'submit' class=\"btn btn-default\" name = 'day' value = '$day4'><br><br>";
+echo "<div class='form-group'>";
+echo "<input type = 'submit' class=\"btn btn-default\" name = 'day' value = '$day1'>";
+echo "</div>";
+echo "<div class='form-group'>";
+echo "<input type = 'submit' class=\"btn btn-default\" name = 'day' value = '$day2'>";
+echo "</div>";
+echo "<div class='form-group'>";
+echo "<input type = 'submit' class=\"btn btn-default\" name = 'day' value = '$day3'>";
+echo "</div>";
+echo "<div class='form-group'>";
+echo "<input type = 'submit' class=\"btn btn-default\" name = 'day' value = '$day4'>";
+echo "</div>";
 echo "</form>";
 echo "<form action = 'user_index.php'>";
 echo "<input type = 'hidden' name = 'ID' value = '$ID'>";

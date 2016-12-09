@@ -3,6 +3,7 @@
 <head>
     <meta charset='utf-8'>
     <title>シフト表作成-確認-</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
     <?php
@@ -57,6 +58,13 @@
                 unlink($path . "/" . $file_name);
             }
         }
+        $path = '../data/shift/blank';
+        $res_dir = opendir($path);
+        while ($file_name = readdir($res_dir)) {
+            if (is_file($path . "/" . $file_name)) {
+                unlink($path . "/" . $file_name);
+            }
+        }
 
         for ($count = 0; $count <= 6; $count++) {
 
@@ -96,11 +104,13 @@
     echo "<input type = 'hidden' name = 'year' value = '$year'>";
     echo "<input type = 'hidden' name = 'month' value = '$month'>";
     echo "<input type = 'hidden' name = 'day' value = '$first_day'>";
-    echo "<button type = 'submit' name = 'action' value = 'enter'>確定</button>";
-    echo "<button type = 'submit' name = 'action' value = 'modify'>修正</button>
-             </form><br><br>";
+    echo "<div class='form-group'>";
+    echo "<button type = 'submit' class=\"btn btn-default\" name = 'action' value = 'enter'>確定</button>";
+    echo "<button type = 'submit' class=\"btn btn-default\" name = 'action' value = 'modify'>修正</button>";
+    echo "</div></form>";
+
     echo "<form action = 'shift_create_selectday.php'>";
-    echo "<button type = 'submit'>戻る</button>
+    echo "<button type = 'submit' class=\"btn btn-warning\">戻る</button>
              </form>";
     ?>
 </body>

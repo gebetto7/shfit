@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>シフト表提出-確認-</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 <?php
@@ -83,7 +84,7 @@ for ($x = 0; $x <= 6; $x++){
 }
 echo "<form action = 'submission_selectday.php'>";
 echo "<input type = 'hidden' name = 'ID' value = '$ID'>";
-echo "<button type = 'submit'>戻る</button>
+echo "<button type = 'submit' class=\"btn btn-warning\">戻る</button>
              </form>";
 ?>
 </body>

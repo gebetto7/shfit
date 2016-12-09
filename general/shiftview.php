@@ -1,3 +1,11 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <title>シフト表確認</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
 <?php
 $ID = $_GET['ID'];
 include '../general/shift_view.php';
@@ -24,5 +32,8 @@ for ($x = 0; $x < 7; $x++){
 
 echo "<form action = 'view_selectday.php'>";
 echo "<input type = 'hidden' name = 'ID' value = '$ID'>";
-echo "<button type = 'submit'>戻る</button>
+echo "<button type = 'submit' class=\"btn btn-warning\">戻る</button>
              </form>";
+?>
+</body>
+</html>

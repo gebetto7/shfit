@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>シフト表提出-日時選択-</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 <?php
@@ -34,7 +35,7 @@ for ($count = 0; $count <= 6; $count++) {   //一週間分
     for ($i = 0;$i < sizeof($time_zone_array['time_zone']); $i++){
         $t = "t" . $count . "_" . $i;
         $time_zone_name = $time_zone_array['time_zone'][$i]['name'];
-        echo "<input type = 'checkbox' name = '$t' value = '1'>" . $time_zone_name;
+        echo "<label class=\"checkbox-inline\"><input type = 'checkbox' name = '$t' value = '1'>" . $time_zone_name . "</label>";
     }
     //日付の更新
     $day++;
@@ -44,12 +45,18 @@ for ($count = 0; $count <= 6; $count++) {   //一週間分
     $day = $day_array['day'];
     echo "<br><br>";
 }
+echo "<div class=\"form-group\">";
 echo "<input type = 'hidden' name = 'ID' value = '$ID'>";
 echo "<input type = 'hidden' name = 'year' value = '$year'>";
 echo "<input type = 'hidden' name = 'month' value = '$month'>";
 echo "<input type = 'hidden' name = 'day' value = '$first_day'>";
-echo "<button type = 'submit' >確定</button>";
+echo "<button type = 'submit' class=\"btn btn-success\">確定</button>";
+echo "</div></form>";
 
+echo "<form action = 'submission_selectday.php' method = 'get'>";
+echo "<input type = 'hidden' name = 'ID' value = '$ID'>";
+echo "<button type = 'submit' class=\"btn btn-warning\">戻る</button>
+             </form>";
 ?>
 </body>
 </html>

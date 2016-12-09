@@ -3,6 +3,7 @@
 <head>
     <meta charset='utf-8'>
     <title>シフト表作成-週選択-</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 <?php
@@ -66,14 +67,24 @@
     echo "<form action = 'shift_create.php' method = 'get'>";
     echo "<input type = 'hidden' name = 'action' value = 'normal'>";
     echo "<input type = 'hidden' name = 'modify' value = 'false'>";
-    echo "<input type = 'submit' name = 'day' value = '$day1'><br><br>";
-    echo "<input type = 'submit' name = 'day' value = '$day2'><br><br>";
-    echo "<input type = 'submit' name = 'day' value = '$day3'><br><br>";
-    echo "<input type = 'submit' name = 'day' value = '$day4'><br><br>";
+    echo "<div class='form-group'>";
+    echo "<input type = 'submit' class=\"btn btn-default\" name = 'day' value = '$day1'>";
+    echo "</div>";
+    echo "<div class='form-group'>";
+    echo "<input type = 'submit' class=\"btn btn-default\" name = 'day' value = '$day2'>";
+    echo "</div>";
+    echo "<div class='form-group'>";
+    echo "<input type = 'submit' class=\"btn btn-default\" name = 'day' value = '$day3'>";
+    echo "</div>";
+    echo "<div class='form-group'>";
+    echo "<input type = 'submit' class=\"btn btn-default\" name = 'day' value = '$day4'>";
+    echo "</div>";
     echo "</form>";
+
     echo "<form action = 'admin_index.php'>";
-    echo "<button type = 'submit'>戻る</button>
-            </form>";
+    echo "<div class='form-group'>";
+    echo "<button type = 'submit' class=\"btn btn-warning\">戻る</button>";
+    echo "</div></form>";
 ?>
 </body>
 </html>
