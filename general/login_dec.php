@@ -20,7 +20,7 @@ else if($ID){
     }
 }
 else{
-    header('location: ../user/user_index.php?error=2');
+    header('location: login.php?error=2');
     exit;
 }
 ?>

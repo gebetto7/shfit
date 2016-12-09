@@ -61,19 +61,37 @@ $day4 = $day_array[21]['year'] . "/" . $day_array[21]['month'] . "/" . $day_arra
 echo "<form action = 'shiftview.php' method = 'get'>";
 echo "<input type = 'hidden' name = 'ID' value = '$ID'>";
 echo "<input type = 'hidden' name = 'action' value = 'normal'>";
+
 echo "<div class='form-group'>";
-echo "<input type = 'submit' class=\"btn btn-default\" name = 'day' value = '$day1'>";
+if (file_exists("../data/shift/main/" . $day_array[0]['year'] . $day_array[0]['month'] . $day_array[0]['day'] . ".json"))
+    echo "<input type = 'submit' class=\"btn btn-default\" name = 'day' value = '$day1'>";
+else
+    echo "<input type = 'submit' class=\"btn btn-default\" disabled=\"disabled\" name = 'day' value = '$day1'>";
 echo "</div>";
+
 echo "<div class='form-group'>";
-echo "<input type = 'submit' class=\"btn btn-default\" name = 'day' value = '$day2'>";
+if (file_exists("../data/shift/main/" . $day_array[7]['year'] . $day_array[7]['month'] . $day_array[7]['day'] . ".json"))
+    echo "<input type = 'submit' class=\"btn btn-default\" name = 'day' value = '$day2'>";
+else
+    echo "<input type = 'submit' class=\"btn btn-default\" disabled=\"disabled\" name = 'day' value = '$day2'>";
 echo "</div>";
+
 echo "<div class='form-group'>";
-echo "<input type = 'submit' class=\"btn btn-default\" name = 'day' value = '$day3'>";
+if (file_exists("../data/shift/main/" . $day_array[14]['year'] . $day_array[14]['month'] . $day_array[14]['day'] . ".json"))
+    echo "<input type = 'submit' class=\"btn btn-default\" name = 'day' value = '$day3'>";
+else
+    echo "<input type = 'submit' class=\"btn btn-default\" disabled=\"disabled\" name = 'day' value = '$day3'>";
 echo "</div>";
+
 echo "<div class='form-group'>";
-echo "<input type = 'submit' class=\"btn btn-default\" name = 'day' value = '$day4'>";
+if (file_exists("../data/shift/main/" . $day_array[21]['year'] . $day_array[21]['month'] . $day_array[21]['day'] . ".json"))
+    echo "<input type = 'submit' class=\"btn btn-default\" name = 'day' value = '$day4'>";
+else
+    echo "<input type = 'submit' class=\"btn btn-default\" disabled=\"disabled\" name = 'day' value = '$day4'>";
 echo "</div>";
+
 echo "</form>";
+
 if ($ID == 999){
     echo "<form action = '../admin/admin_index.php' method = 'get'>";
     echo "<input type = 'hidden' name = 'ID' value = '$ID'>";

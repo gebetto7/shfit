@@ -21,7 +21,7 @@ function shift_view($folder, $year, $month, $day)
     $shift_array = json_decode($json, true);
 
     /*時間の表示(表)*/
-    echo '<table class="table table-bordered"><thead><tr><td></td>';
+    echo '<table class="table table-striped"><thead><tr><td></td>';
     for ($a = 0; $a <= 23; $a++) {
         echo '<td>' . $a . '</td>';
     }

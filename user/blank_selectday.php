@@ -55,18 +55,54 @@ $day4 = $day_array[21]['year'] . "/" . $day_array[21]['month'] . "/" . $day_arra
 //日付の判定を行い、その日付をformのnameに表示する
 echo "<form action = 'blank_fill.php' method = 'get'>";
 echo "<input type = 'hidden' name = 'ID' value = '$ID'>";
+//---------------------------------------------------------------------
 echo "<div class='form-group'>";
-echo "<input type = 'submit' class=\"btn btn-default\" name = 'day' value = '$day1'>";
+for ($x = 0; $x <= 6; $x++){
+    if (file_exists("../data/shift/blank/" . $day_array[$x]['year'] . $day_array[$x]['month'] . $day_array[$x]['day'] . ".json"))
+        break;
+}
+if ($x != 7)
+    echo "<input type = 'submit' class=\"btn btn-default\" name = 'day' value = '$day1'>";
+else
+    echo "<input type = 'submit' class=\"btn btn-default\" disabled=\"disabled\" name = 'day' value = '$day1'>";
 echo "</div>";
+
+//---------------------------------------------------------------------
 echo "<div class='form-group'>";
-echo "<input type = 'submit' class=\"btn btn-default\" name = 'day' value = '$day2'>";
+for ($x = 7; $x <= 13; $x++){
+    if (file_exists("../data/shift/blank/" . $day_array[$x]['year'] . $day_array[$x]['month'] . $day_array[$x]['day'] . ".json"))
+        break;
+}
+if ($x != 14)
+    echo "<input type = 'submit' class=\"btn btn-default\" name = 'day' value = '$day2'>";
+else
+    echo "<input type = 'submit' class=\"btn btn-default\" disabled=\"disabled\" name = 'day' value = '$day2'>";
 echo "</div>";
+
+//---------------------------------------------------------------------
 echo "<div class='form-group'>";
-echo "<input type = 'submit' class=\"btn btn-default\" name = 'day' value = '$day3'>";
+for ($x = 14; $x <= 20; $x++){
+    if (file_exists("../data/shift/blank/" . $day_array[$x]['year'] . $day_array[$x]['month'] . $day_array[$x]['day'] . ".json"))
+        break;
+}
+if ($x != 21)
+    echo "<input type = 'submit' class=\"btn btn-default\" name = 'day' value = '$day3'>";
+else
+    echo "<input type = 'submit' class=\"btn btn-default\" disabled=\"disabled\" name = 'day' value = '$day3'>";
 echo "</div>";
+
+//---------------------------------------------------------------------
 echo "<div class='form-group'>";
-echo "<input type = 'submit' class=\"btn btn-default\" name = 'day' value = '$day4'>";
+for ($x = 21; $x <= 27; $x++){
+    if (file_exists("../data/shift/blank/" . $day_array[$x]['year'] . $day_array[$x]['month'] . $day_array[$x]['day'] . ".json"))
+        break;
+}
+if ($x != 28)
+    echo "<input type = 'submit' class=\"btn btn-default\" name = 'day' value = '$day4'>";
+else
+    echo "<input type = 'submit' class=\"btn btn-default\" disabled=\"disabled\" name = 'day' value = '$day4'>";
 echo "</div>";
+
 echo "</form>";
 echo "<form action = 'user_index.php'>";
 echo "<input type = 'hidden' name = 'ID' value = '$ID'>";
