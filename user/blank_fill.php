@@ -6,6 +6,10 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+<div class="container">
+    <div class="page-header">
+        <h1>欠員補充 <small>時間帯選択</small></h1>
+    </div>
 <?php
 include '../admin/check_date.php';
 $ID = $_GET['ID'];
@@ -63,5 +67,6 @@ echo "<input type = 'hidden' name = 'ID' value = '$ID'>";
 echo "<button type = 'submit' class=\"btn btn-warning\">戻る</button>
              </form>";
 ?>
+    </div>
 </body>
 </html>

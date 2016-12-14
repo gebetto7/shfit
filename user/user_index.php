@@ -8,6 +8,10 @@
 <body>
 <?php
 $ID = $_GET['ID'];
+echo "<div class=\"container\">";
+echo "<div class=\"page-header\">";
+echo "<h1>トップページ <small>スタッフ用</small></h1>";
+echo "</div>";
 echo "<div class='form-group'>";
 echo "<form action = 'submission_selectday.php' method = 'get'>";
 echo "<input type = 'hidden' name = 'ID' value = '$ID'>";
@@ -32,6 +36,9 @@ echo "</div>";
 echo "<div class='form-group'>";
 echo "<form action = '../general/login.php'>";
 echo "<button type = 'submit' class=\"btn btn-danger\">ログアウト</button></form>";
+echo "</div>";
+
+echo "</div>";
 echo "</div>";
 ?>
 </body>

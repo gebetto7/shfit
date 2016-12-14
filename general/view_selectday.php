@@ -6,6 +6,10 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+<div class="container">
+    <div class="page-header">
+        <h1>シフト表閲覧 <small>週選択</small></h1>
+    </div>
 <?php
 if (isset($_GET['ID'])){
     $ID = $_GET['ID'];
@@ -103,5 +107,6 @@ else {
     echo "<button type = 'submit' class=\"btn btn-warning\">戻る</button></form>";
 }
 ?>
+    </div>
 </body>
 </html>

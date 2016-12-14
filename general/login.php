@@ -9,6 +9,9 @@
 <?php
 
 echo "<div class=\"container\">";
+echo "<div class=\"page-header\">";
+echo "<h1>ログイン</h1>";
+echo "</div>";
 if (isset($_GET['error'])){
     switch ($_GET['error']){
         case 1:

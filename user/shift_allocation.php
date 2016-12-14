@@ -6,6 +6,10 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+<div class="container">
+    <div class="page-header">
+        <h1>シフト表提出 <small>確認</small></h1>
+    </div>
 <?php
 include '../admin/check_date.php';
 include '../admin/shift_swap.php';
@@ -27,7 +31,7 @@ $error_msg = "<br>下記の内容は既に希望を提出しています。<br>"
 $success_msg = "<br>下記の内容で出勤希望を提出しました。<br>";
 
 for ($x = 0; $x <= 6; $x++){
-    for ($y = 0; $y < sizeof($time_zone_array['time_zone']); $y++){     //メッセージ処理の関係で２重ループの中に２重ループという大変非効率な事になってる
+    for ($y = 0; $y < sizeof($time_zone_array['time_zone']); $y++){
         $key = "t" . $x . "_" . $y;
         if (isset($_GET[$key])){        //希望があった場合
             $push_data = Array(
@@ -102,5 +106,6 @@ echo "<input type = 'hidden' name = 'ID' value = '$ID'>";
 echo "<button type = 'submit' class=\"btn btn-warning\">戻る</button>
              </form>";
 ?>
+    </div>
 </body>
 </html>

@@ -6,6 +6,10 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+<div class="container">
+    <div class="page-header">
+        <h1>シフト表作成 <small>週選択</small></h1>
+    </div>
 <?php
     include 'shift_swap.php';
     include 'time_calculation.php';   //勤務合計時間算出
@@ -86,5 +90,6 @@
     echo "<button type = 'submit' class=\"btn btn-warning\">戻る</button>";
     echo "</div></form>";
 ?>
+    </div>
 </body>
 </html>

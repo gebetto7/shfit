@@ -6,9 +6,12 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+<div class="container">
+    <div class="page-header">
+        <h1>シフト表提出 <small>日時選択</small></h1>
+    </div>
 <?php
 include '../admin/check_date.php';
-
 $ID = $_GET['ID'];
 if ($_GET['action'] == 'normal'){  //日付選択画面から来た場合
     $day_array = $_GET['day'];
@@ -58,5 +61,6 @@ echo "<input type = 'hidden' name = 'ID' value = '$ID'>";
 echo "<button type = 'submit' class=\"btn btn-warning\">戻る</button>
              </form>";
 ?>
+</div>
 </body>
 </html>

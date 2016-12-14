@@ -3,12 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>シフト表作成-修正確認-</title>
+    <style>
+        .sampleRow > div {
+            border: 1px solid gray;
+        }
+    </style>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+<div class="container">
+    <div class="page-header">
+        <h1>シフト表修正 <small>確認画面</small></h1>
+    </div>
 <?php
 include "check_date.php";
 if (isset($_GET['action'])){
+    $date = $_GET['date'];
+
     $year = $_GET['year'];
     $month = $_GET['month'];
     $day = $_GET['day'];
@@ -39,9 +50,10 @@ if (isset($_GET['action'])){
     $time_zone_url = "../data/management/time_zone.json";
     $json = file_get_contents($time_zone_url);
     $time_zone_array = json_decode($json, true);
-
+    echo "<div class=\"row sampleRow\">";
     for ($count = 0; $count <= 6; $count++){
-        echo "<br>" . ($count + 1) . "日目----------------------------------------<br>";
+        echo "<div class=\"col-xs-4\">";
+        echo "<p class='lead'>" . ($count + 1) . "日目</p>";
         $count2 = 0;    //シフト表走査用
         $numberp = 0;   //時間帯で何人入っているかの判断用
 
@@ -63,8 +75,8 @@ if (isset($_GET['action'])){
 
                 $key = $shift_array['shift'][$count2]['number'];
                 if ($staff_array['staff'][$key]['name'] != $name_array[$numberp][$count][$time_zone_count]){
-                    echo ($numberp + 1) . "人目 : 変更があります。　　　　　";
-                    echo $staff_array['staff'][$key]['name'] . "→→→→→";
+                    echo ($numberp + 1) . "人目 : ";
+                    echo $staff_array['staff'][$key]['name'] . "→→→";
                     echo $name_array[$numberp][$count][$time_zone_count] . "<br>";
                     for ($x = 0; $x < (sizeof($staff_array['staff'])); $x++){  //変更後の人物のナンバーを取得する
                         if ($staff_array['staff'][$x]['name'] == $name_array[$numberp][$count][$time_zone_count])
@@ -101,9 +113,11 @@ if (isset($_GET['action'])){
         $year = $day_array['year'];
         $month = $day_array['month'];
         $day = $day_array['day'];
+        echo "</div>";
     }
-
+    echo "</div>";
     echo "<form action = 'shift_create.php' method = 'get'>";
+    echo "<input type = 'hidden' name = 'date' value = '$date'>";
     echo "<input type = 'hidden' name = 'year' value = '$year'>";
     echo "<input type = 'hidden' name = 'month' value = '$month'>";
     echo "<input type = 'hidden' name = 'day' value = '$first_day'>";
@@ -116,5 +130,6 @@ else
     echo "error<br>";
 
 ?>
+    </div>
 </body>
 </html>

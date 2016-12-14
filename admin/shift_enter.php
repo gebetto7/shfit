@@ -10,7 +10,14 @@
 include 'check_date.php';
 if (isset($_GET['action'])){
     if ($_GET['action'] == 'enter'){    //確定
-        echo "シフト表を保存しました。<br>";
+
+        //------------title------------------------
+        echo "<div class=\"container\">";
+        echo "<div class=\"page-header\">";
+        echo "<h1>シフト表作成 <small>完了</small></h1>";
+        echo "</div>";
+        //-----------------------------------------
+        echo "<div class=\"alert alert-success\" role=\"alert\"><strong>success</strong>: シフト表を保存しました．</div>";
         echo "<form action = 'shift_create_selectday.php'>";
 
         $year = $_GET['year'];
@@ -56,10 +63,18 @@ if (isset($_GET['action'])){
 //=============================================================================================
     else if($_GET['action'] == 'modify'){   //修正
 
+        $date = $_GET['date'];
         $year = $_GET['year'];
         $month = $_GET['month'];
         $day = $_GET['day'];
         $first_day = $day;
+
+        //------------title------------------------
+        echo "<div class=\"container\">";
+        echo "<div class=\"page-header\">";
+        echo "<h1>シフト表修正 <small>$date</small></h1>";
+        echo "</div>";
+        //-----------------------------------------.
 
         /*JSONデータ(スタッフ情報)の読み込み*/
         $staff_url = "../data/management/staff.json";
@@ -71,7 +86,7 @@ if (isset($_GET['action'])){
         $json = file_get_contents($time_zone_url);
         $time_zone_array = json_decode($json, true);
 
-        echo "<form class=\"form-inline\" action = 'shift_test.php' method = 'get'>";
+        echo "<form class=\"form-inline\" action = 'shift_modify_enter.php' method = 'get'>";
 
         for ($count = 0; $count <= 6; $count++) {
 
@@ -83,17 +98,17 @@ if (isset($_GET['action'])){
             $json = file_get_contents($shift_url);
             $shift_array = json_decode($json, true);
 
-            echo $year . "年" . $month . "月" . $day . "日<br>";
+            echo "<p class='lead'>" . $year . "年" . $month . "月" . $day . "日</p>";
             $count2 = 0;
             $time_zone_count = 0;
             $numberp = 0;
 
             for ($time_zone_count = 0; $time_zone_count < sizeof($time_zone_array['time_zone']); $time_zone_count++){
 
-                echo $time_zone_array['time_zone'][$time_zone_count]['name'] . "<br>";
+                echo "<p class='lead'>" . $time_zone_array['time_zone'][$time_zone_count]['name'] . "</p>";
 
                 /*時間の表示(表)*/
-                echo '<table class="table table-bordered"><thead><tr><td></td>';
+                echo '<table class="table table-bordered table-hover"><thead><tr><td></td>';
                 for ($a = 0; $a <= 23; $a++) {
                     echo '<td>' . $a . '</td>';
                 }
@@ -156,9 +171,15 @@ if (isset($_GET['action'])){
                 $numberp = 0;
             }
             $day++;
+            //日付の更新
+            $day_array = check_date($year, $month, $day);
+            $year = $day_array['year'];
+            $month = $day_array['month'];
+            $day = $day_array['day'];
             echo "<br><br>";
         }
         echo "<div class='form-group'>";
+        echo "<input type = 'hidden' name = 'date' value = '$date'>";
         echo "<input type = 'hidden' name = 'year' value = '$year'>";
         echo "<input type = 'hidden' name = 'month' value = '$month'>";
         echo "<input type = 'hidden' name = 'day' value = '$first_day'>";
@@ -167,13 +188,13 @@ if (isset($_GET['action'])){
 
         echo "<form action = 'shift_create.php' method = 'get'>";
         echo "<div class='form-group'>";
+        echo "<input type = 'hidden' name = 'date' value = '$date'>";
         echo "<input type = 'hidden' name = 'year' value = '$year'>";
         echo "<input type = 'hidden' name = 'month' value = '$month'>";
         echo "<input type = 'hidden' name = 'day' value = '$first_day'>";
         echo "<input type = 'hidden' name = 'modify' value = 'false'>";
         echo "<br><button type = 'submit' class=\"btn btn-warning\" name = 'action' value = 'back'>戻る</button>";
         echo "</div></form>";
-
     }
     else{
         echo "error<br>";
@@ -183,5 +204,6 @@ else{
     echo "error<br>";
 }
 ?>
+</div>
 </body>
 </html>

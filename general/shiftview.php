@@ -14,6 +14,11 @@ include '../admin/check_date.php';
 
 $day_array = $_GET['day'];
 
+echo "<div class=\"container\">";
+echo "<div class=\"page-header\">";
+echo "<h1>シフト表閲覧 <small>$day_array</small></h1>";
+echo "</div>";
+
 $year  = strstr($day_array, "/", TRUE);
 $month = strstr(substr(strstr($day_array, "/"), 1), "/", TRUE);
 $day = strstr(substr(strstr(substr(strstr($day_array, "/"), 1), "/"), 1), "～", TRUE);
@@ -35,5 +40,6 @@ echo "<input type = 'hidden' name = 'ID' value = '$ID'>";
 echo "<button type = 'submit' class=\"btn btn-warning\">戻る</button>
              </form>";
 ?>
+    </div>
 </body>
 </html>

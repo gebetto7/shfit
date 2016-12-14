@@ -6,7 +6,12 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+<div class="container">
+    <div class="page-header">
+        <h1>欠員補充 <small>確認</small></h1>
+    </div>
 <?php
+include '../admin/shift_swap.php';
 include '../admin/check_date.php';
 $ID = $_GET['ID'];
 
@@ -73,6 +78,7 @@ for ($x = 0; $x <= 6; $x++){    //一週間分
     $fjson = fopen($shift_url, "w+b");
     fwrite($fjson, json_encode($shift_array, JSON_UNESCAPED_UNICODE));
     fclose($fjson);
+    swap($shift_url);
 
     if ($count){    //一回でもいたら保存する、入れ替えをしなかった場合はファイルを保存しない
         if ($blank_array[$date]){   //欠員一覧が全部埋まった場合は保存せずファイルを消す
@@ -103,5 +109,6 @@ echo "<input type = 'hidden' name = 'ID' value = '$ID'>";
 echo "<button type = 'submit' class=\"btn btn-warning\">戻る</button>
              </form>";
 ?>
+</div>
 </body>
 </html>
